@@ -28,6 +28,11 @@
         <constructor-arg ref="restTemplateCustomer"/>
         <constructor-arg ref="xpathTemplate"/>
     </bean>
+    
+    <bean id="urlShortenerClient" class="sample.resttemplate.UrlShortenerClient">
+        <constructor-arg ref="restTemplateUrlShortener"/>
+        <constructor-arg ref="xpathTemplate"/>
+    </bean>
 
     <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
         <property name="messageConverters">
@@ -43,6 +48,15 @@
             <list>
                 <bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"/>
                 <bean class="sample.resttemplate.XmlHttpMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="restTemplateUrlShortener" class="org.springframework.web.client.RestTemplate">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"/>
+                <bean class="sample.resttemplate.UrlShortenerMessageConverter"/>
             </list>
         </property>
     </bean>

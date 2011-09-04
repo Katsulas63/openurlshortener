@@ -42,6 +42,18 @@ public class Driver {
                     new ClassPathXmlApplicationContext("applicationContext.xml", Driver.class);
             CustomerClient client = applicationContext.getBean("customerClient", CustomerClient.class);
             client.doIt();
+        } else if ("shortenURL".equals(wsclient)) {
+        	ApplicationContext applicationContext =
+                    new ClassPathXmlApplicationContext("applicationContext.xml", Driver.class);
+        	UrlShortenerClient client = applicationContext.getBean("urlShortenerClient", UrlShortenerClient.class);
+            final String longUrl = client.shortenUrl("111111111");
+            System.out.println("longUrl="+longUrl);
+        } else if ("expandURL".equals(wsclient)) {
+        	ApplicationContext applicationContext =
+                    new ClassPathXmlApplicationContext("applicationContext.xml", Driver.class);
+        	UrlShortenerClient client = applicationContext.getBean("urlShortenerClient", UrlShortenerClient.class);
+        	final String shortUrl = client.expandUrl("11111111");
+            System.out.println("shortUrl="+shortUrl);
         }
         
         System.out.println("END.");
