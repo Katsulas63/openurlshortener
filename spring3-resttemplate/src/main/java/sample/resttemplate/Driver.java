@@ -24,17 +24,27 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Driver {
 
     public static void main(String[] args) {
-        if (args.length < 2) {
+        if (args.length < 3) {
             System.out.println("Usage: java " + Driver.class.getName() + " [Flickr API key] [search term]");
             System.exit(-1);
         }
         String apiKey = args[0];
         String searchTerm = args[1];
-
-        ApplicationContext applicationContext =
-                new ClassPathXmlApplicationContext("applicationContext.xml", Driver.class);
-        FlickrClient client = applicationContext.getBean("flickrClient", FlickrClient.class);
-        client.doIt(apiKey, searchTerm);
+        String wsclient = args[2];
+        
+        if ("flickr".equals(wsclient)) {
+        	ApplicationContext applicationContext =
+                    new ClassPathXmlApplicationContext("applicationContext.xml", Driver.class);
+            FlickrClient client = applicationContext.getBean("flickrClient", FlickrClient.class);
+            client.doIt(apiKey, searchTerm);
+        } else if ("customer".equals(wsclient)) {
+        	ApplicationContext applicationContext =
+                    new ClassPathXmlApplicationContext("applicationContext.xml", Driver.class);
+            CustomerClient client = applicationContext.getBean("customerClient", CustomerClient.class);
+            client.doIt();
+        }
+        
+        System.out.println("END.");
     }
 
 }

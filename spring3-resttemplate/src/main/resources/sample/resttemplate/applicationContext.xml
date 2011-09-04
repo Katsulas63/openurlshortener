@@ -23,12 +23,26 @@
         <constructor-arg ref="restTemplate"/>
         <constructor-arg ref="xpathTemplate"/>
     </bean>
+    
+    <bean id="customerClient" class="sample.resttemplate.CustomerClient">
+        <constructor-arg ref="restTemplateCustomer"/>
+        <constructor-arg ref="xpathTemplate"/>
+    </bean>
 
     <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
         <property name="messageConverters">
             <list>
                 <bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"/>
                 <bean class="sample.resttemplate.BufferedImageHttpMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="restTemplateCustomer" class="org.springframework.web.client.RestTemplate">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"/>
+                <bean class="sample.resttemplate.XmlHttpMessageConverter"/>
             </list>
         </property>
     </bean>
