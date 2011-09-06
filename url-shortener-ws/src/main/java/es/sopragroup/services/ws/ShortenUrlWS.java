@@ -39,12 +39,11 @@ public class ShortenUrlWS extends AbstractShortableUrlWS {
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public String shortenURL(@PathParam("longURL") String longUrl) {
 		UrlShortable url = new UrlShortable();
-		url.setLongUrl(longUrl);
+		url.setId(urlShortableDAO.getCountUrls().intValue());
+		url.setLongUrl(UrlUtil.decodeUrl(longUrl));
+		url.setShortUrl(UrlUtil.generateShortUrl(url.getId()));
 		
-		final String shortUrl = UrlUtil.generateShortUrl(UrlUtil.decodeUrl(longUrl));
-		url.setShortUrl(shortUrl);
-		
-		this.getUrlShortableDAO().saveUrl(url);
+		url = urlShortableDAO.saveUrl(url);		
 		return url.getShortUrl();
 	}
 	

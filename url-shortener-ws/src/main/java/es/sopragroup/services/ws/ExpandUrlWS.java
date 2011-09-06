@@ -7,9 +7,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.sun.jersey.spi.inject.Inject;
 import com.sun.jersey.spi.resource.Singleton;
 
 import es.sopragroup.core.dao.IUrlShortableDAO;
@@ -21,7 +21,7 @@ import es.sopragroup.core.util.UrlUtil;
 @Path("expandURL")
 public class ExpandUrlWS extends AbstractShortableUrlWS {
 	
-	@Inject
+	@Autowired
 	private IUrlShortableDAO urlShortableDAO;
 	
 	public ExpandUrlWS() {
@@ -37,9 +37,17 @@ public class ExpandUrlWS extends AbstractShortableUrlWS {
 	@Path("{shortURL}")
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public String expandURL(@PathParam("shortURL")String shortUrl) {		
+	public String expandURL(@PathParam("shortURL")String shortUrl) {				
+		String result = "";
 		final UrlShortable url = this.getUrlShortableDAO().getUrlByShortUrl(UrlUtil.decodeUrl(shortUrl));
-		return url.getLongUrl();
+		
+		if (url != null) {
+			result = url.getLongUrl();
+		} else {
+			result = "[expandURL-ws] ERROR: The specified short-url cannot be expanded.";
+		}
+		
+		return result;
 	}
 	
 	/**

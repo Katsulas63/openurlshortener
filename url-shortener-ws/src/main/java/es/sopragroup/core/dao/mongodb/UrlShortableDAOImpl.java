@@ -28,8 +28,10 @@ public class UrlShortableDAOImpl implements IUrlShortableDAO {
 	@Autowired(required=true)
 	private MongoTemplate mongoTemplate;
 	
-	public void saveUrl(UrlShortable url) {
+	public UrlShortable saveUrl(UrlShortable url) {
 		mongoTemplate.save(url);
+		
+		return url;
 	}
 
 	protected List<UrlShortable> getUrls(String fieldName, String value) {

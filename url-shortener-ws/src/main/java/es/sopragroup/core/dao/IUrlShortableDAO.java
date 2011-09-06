@@ -4,7 +4,7 @@ import es.sopragroup.core.entity.UrlShortable;
 
 public interface IUrlShortableDAO {
 	
-	void saveUrl(UrlShortable url);	
+	UrlShortable saveUrl(UrlShortable url);	
 	
 	Long getCountUrls();
 
