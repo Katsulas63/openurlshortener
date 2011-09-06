@@ -19,7 +19,7 @@ import es.sopragroup.core.util.UrlUtil;
 @Component
 @Singleton
 @Path("expandURL")
-public class ExpandUrlWS extends AbstractShortableUrlWS {
+public class ExpandUrlWS {
 	
 	@Autowired
 	private IUrlShortableDAO urlShortableDAO;
@@ -44,7 +44,7 @@ public class ExpandUrlWS extends AbstractShortableUrlWS {
 		if (url != null) {
 			result = url.getLongUrl();
 		} else {
-			result = "[expandURL-ws] ERROR: The specified short-url cannot be expanded.";
+			result = "ERROR: The specified short-url cannot be expanded.";
 		}
 		
 		return result;

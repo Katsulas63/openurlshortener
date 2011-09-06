@@ -6,6 +6,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
         <wb-resource deploy-path="/" source-path="/target/url-shortener-ws-1.0.0-BUILD-SNAPSHOT"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
         <property name="context-root" value="url-shortener-ws"/>
         <property name="java-output-path" value="/url-shortener-ws/target/classes"/>
     </wb-module>

@@ -19,7 +19,7 @@ import es.sopragroup.core.util.UrlUtil;
 @Path("shortenURL")
 @Component
 @Singleton
-public class ShortenUrlWS extends AbstractShortableUrlWS {
+public class ShortenUrlWS {
 
 	@Autowired
 	private IUrlShortableDAO urlShortableDAO;
@@ -37,14 +37,24 @@ public class ShortenUrlWS extends AbstractShortableUrlWS {
 	@Path("{longURL}")
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public String shortenURL(@PathParam("longURL") String longUrl) {
-		UrlShortable url = new UrlShortable();
-		url.setId(urlShortableDAO.getCountUrls().intValue());
-		url.setLongUrl(UrlUtil.decodeUrl(longUrl));
-		url.setShortUrl(UrlUtil.generateShortUrl(url.getId()));
-		
-		url = urlShortableDAO.saveUrl(url);		
-		return url.getShortUrl();
+	public String shortenURL(@PathParam("longURL") String longUrl) {		
+		String result = "";
+		longUrl = UrlUtil.decodeUrl(longUrl);
+		final UrlShortable existingUrl = urlShortableDAO.getUrlByLongUrl(longUrl);		
+		if (existingUrl != null) {
+			result = "WARNING: This long-url has been already shorted to: "+existingUrl.getShortUrl();
+		} else {
+			UrlShortable url = new UrlShortable();
+			url.setId(urlShortableDAO.getCountUrls().intValue());
+			url.setLongUrl(longUrl);
+			url.setShortUrl(UrlUtil.generateShortUrl(url.getId()));
+			
+			url = urlShortableDAO.saveUrl(url);	
+			
+			result = url.getShortUrl();
+		}		
+			
+		return result;
 	}
 	
 	/**
