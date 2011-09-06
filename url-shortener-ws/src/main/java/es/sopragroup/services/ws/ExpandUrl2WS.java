@@ -7,8 +7,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.springframework.stereotype.Component;
-
 import com.sun.jersey.spi.inject.Inject;
 import com.sun.jersey.spi.resource.Singleton;
 
@@ -16,15 +14,14 @@ import es.sopragroup.core.dao.IUrlShortableDAO;
 import es.sopragroup.core.entity.UrlShortable;
 import es.sopragroup.core.util.UrlUtil;
 
-@Component
+@Path("expandURL2")
 @Singleton
-@Path("expandURL")
-public class ExpandUrlWS extends AbstractShortableUrlWS {
-	
+public class ExpandUrl2WS extends AbstractShortableUrlWS {
+
 	@Inject
 	private IUrlShortableDAO urlShortableDAO;
 	
-	public ExpandUrlWS() {
+	public ExpandUrl2WS() {
 		super();
 	}
 	
@@ -35,11 +32,11 @@ public class ExpandUrlWS extends AbstractShortableUrlWS {
 	 */
 	@GET
 	@Path("{shortURL}")
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(MediaType.APPLICATION_XML)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public String expandURL(@PathParam("shortURL")String shortUrl) {		
-		final UrlShortable url = this.getUrlShortableDAO().getUrlByShortUrl(UrlUtil.decodeUrl(shortUrl));
-		return url.getLongUrl();
+	public UrlShortable expandURL(@PathParam("shortURL")String shortUrl) {
+		final UrlShortable url = this.getUrlShortableDAO().getUrlByShortUrl(UrlUtil.decodeUrl(shortUrl));		
+		return url;
 	}
 	
 	/**

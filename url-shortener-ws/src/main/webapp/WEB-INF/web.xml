@@ -5,12 +5,15 @@
 
 	<context-param>
 		<param-name>contextInitializerClasses</param-name>
-		<param-value>es.sopragroup.services.cloud.CloudApplicationContextInitializer</param-value>
+		<param-value>es.sopragroup.services.CloudApplicationContextInitializer</param-value>
 	</context-param>
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:/root-context.xml</param-value>
+		<param-value>
+			classpath:/root-context.xml,
+			classpath:/applicationContext-dao.xml
+		</param-value>
 	</context-param>
 	
 	<listener>

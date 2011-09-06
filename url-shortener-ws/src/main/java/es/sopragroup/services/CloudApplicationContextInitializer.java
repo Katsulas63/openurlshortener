@@ -1,4 +1,4 @@
-package es.sopragroup.services.cloud;
+package es.sopragroup.services;
 
 import org.cloudfoundry.runtime.env.CloudEnvironment;
 import org.springframework.context.ApplicationContextInitializer;

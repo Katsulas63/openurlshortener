@@ -7,39 +7,43 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import com.sun.jersey.spi.inject.Inject;
 import com.sun.jersey.spi.resource.Singleton;
 
 import es.sopragroup.core.dao.IUrlShortableDAO;
 import es.sopragroup.core.entity.UrlShortable;
 import es.sopragroup.core.util.UrlUtil;
 
-@Component
+@Path("shortenURL2")
 @Singleton
-@Path("expandURL")
-public class ExpandUrlWS extends AbstractShortableUrlWS {
-	
-	@Inject
+public class ShortenUrl2WS extends AbstractShortableUrlWS {
+
+	@Autowired
 	private IUrlShortableDAO urlShortableDAO;
 	
-	public ExpandUrlWS() {
+	public ShortenUrl2WS() {
 		super();
 	}
 	
 	/**
-	 * Obtiene de BD la url larga a partir de la corta
-	 * @param shortUrl URL corta
-	 * @return URL larga
+	 * Genera la URL corta a partir de la larga y almacena ambas en BD 
+	 * @param longUrl URL larga
+	 * @return URL corta
 	 */
 	@GET
-	@Path("{shortURL}")
-	@Produces(MediaType.TEXT_PLAIN)
+	@Path("{longURL}")
+	@Produces(MediaType.APPLICATION_XML)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public String expandURL(@PathParam("shortURL")String shortUrl) {		
-		final UrlShortable url = this.getUrlShortableDAO().getUrlByShortUrl(UrlUtil.decodeUrl(shortUrl));
-		return url.getLongUrl();
+	public UrlShortable shortenURL(@PathParam("longURL") String longUrl) {
+		UrlShortable url = new UrlShortable();
+		url.setLongUrl(longUrl);
+		
+		final String shortUrl = UrlUtil.generateShortUrl(UrlUtil.decodeUrl(longUrl));
+		url.setShortUrl(shortUrl);
+		
+		this.getUrlShortableDAO().saveUrl(url);
+		return url;
 	}
 	
 	/**
@@ -55,6 +59,5 @@ public class ExpandUrlWS extends AbstractShortableUrlWS {
 	public void setUrlShortableDAO(IUrlShortableDAO urlShortableDAO) {
 		this.urlShortableDAO = urlShortableDAO;
 	}
-	
 	 
 }

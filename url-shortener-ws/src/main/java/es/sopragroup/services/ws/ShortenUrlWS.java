@@ -7,14 +7,23 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.sun.jersey.spi.resource.Singleton;
 
+import es.sopragroup.core.dao.IUrlShortableDAO;
 import es.sopragroup.core.entity.UrlShortable;
+import es.sopragroup.core.util.UrlUtil;
 
 @Path("shortenURL")
+@Component
 @Singleton
 public class ShortenUrlWS extends AbstractShortableUrlWS {
 
+	@Autowired
+	private IUrlShortableDAO urlShortableDAO;
+	
 	public ShortenUrlWS() {
 		super();
 	}
@@ -32,11 +41,25 @@ public class ShortenUrlWS extends AbstractShortableUrlWS {
 		UrlShortable url = new UrlShortable();
 		url.setLongUrl(longUrl);
 		
-		// TODO algoritmo URL shortering
-		url.setShortUrl(longUrl+"-corta");
+		final String shortUrl = UrlUtil.generateShortUrl(UrlUtil.decodeUrl(longUrl));
+		url.setShortUrl(shortUrl);
 		
-		addUrl(url);
+		this.getUrlShortableDAO().saveUrl(url);
 		return url.getShortUrl();
+	}
+	
+	/**
+	 * @return the urlShortableDAO
+	 */
+	public IUrlShortableDAO getUrlShortableDAO() {
+		return urlShortableDAO;
+	}
+
+	/**
+	 * @param urlShortableDAO the urlShortableDAO to set
+	 */
+	public void setUrlShortableDAO(IUrlShortableDAO urlShortableDAO) {
+		this.urlShortableDAO = urlShortableDAO;
 	}
 	 
 }

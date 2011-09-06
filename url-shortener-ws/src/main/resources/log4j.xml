@@ -11,7 +11,12 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="org.cloudfoundry.services">
+	<logger name="es.sopragroup.services">
+		<level value="info" />
+	</logger>
+	
+	<!-- Application Loggers -->
+	<logger name="es.sopragroup.core">
 		<level value="info" />
 	</logger>
 	
