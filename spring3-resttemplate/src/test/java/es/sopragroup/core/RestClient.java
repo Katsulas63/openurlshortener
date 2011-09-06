@@ -50,14 +50,14 @@ public class RestClient {
         	ApplicationContext applicationContext =
                     new ClassPathXmlApplicationContext("applicationContext.xml", RestClient.class);
         	UrlTxtClient client = applicationContext.getBean("urlTxtClient", UrlTxtClient.class);
-            final String longUrl = client.shortenUrl("http://www.yahoo.es/correo");
-            System.out.println("longUrl="+longUrl);
+            final String shortUrl = client.shortenUrl("http://www.yahoo.es/pop3");
+            System.out.println("shortUrl="+shortUrl);
         } else if ("expandURL".equals(wsclient)) {
         	ApplicationContext applicationContext =
                     new ClassPathXmlApplicationContext("applicationContext.xml", RestClient.class);
         	UrlTxtClient client = applicationContext.getBean("urlTxtClient", UrlTxtClient.class);
-        	final String shortUrl = client.expandUrl("cfcd208495d565ef66e7dff9f98764da");
-            System.out.println("shortUrl="+shortUrl);
+        	final String longUrl = client.expandUrl("c81e728d9d4c2f636f067f89cc14862c");
+            System.out.println("longUrl="+longUrl);
         }
         
         System.out.println("END.");

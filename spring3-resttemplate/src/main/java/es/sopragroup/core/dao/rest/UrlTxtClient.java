@@ -62,6 +62,8 @@ public class UrlTxtClient extends AbstractUrlClient {
 
 		} catch (org.springframework.web.client.HttpClientErrorException e) {
 			shortUrl = "ERROR: " + e.getLocalizedMessage();
+		} catch (org.springframework.web.client.ResourceAccessException e) {
+			shortUrl = "ERROR: " + e.getLocalizedMessage();
 		}
 
 		return shortUrl;
