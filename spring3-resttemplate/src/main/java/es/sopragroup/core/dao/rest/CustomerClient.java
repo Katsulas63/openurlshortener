@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package sample.resttemplate;
+package es.sopragroup.core.dao.rest;
 
 import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
@@ -34,7 +34,7 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-import com.myeclipseide.ws.Customer;
+import es.sopragroup.core.entity.Customer;
 
 public class CustomerClient {
 

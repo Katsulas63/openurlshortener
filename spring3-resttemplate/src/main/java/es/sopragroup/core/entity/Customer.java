@@ -1,4 +1,4 @@
-package com.myeclipseide.ws;
+package es.sopragroup.core.entity;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

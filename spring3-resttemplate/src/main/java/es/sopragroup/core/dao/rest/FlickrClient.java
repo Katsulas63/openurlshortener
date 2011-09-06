@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package sample.resttemplate;
+package es.sopragroup.core.dao.rest;
 
 import java.awt.GridLayout;
 import java.awt.image.BufferedImage;

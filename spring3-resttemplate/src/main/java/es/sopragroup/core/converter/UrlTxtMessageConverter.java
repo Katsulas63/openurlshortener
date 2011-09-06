@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-package sample.resttemplate;
+package es.sopragroup.core.converter;
 
-import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Collections;
 import java.util.List;
-import javax.imageio.ImageIO;
 
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.HttpOutputMessage;
@@ -29,14 +30,16 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 
-public class BufferedImageHttpMessageConverter implements HttpMessageConverter<BufferedImage> {
+public class UrlTxtMessageConverter implements HttpMessageConverter<String> {
+	
+	public static String LS = System.getProperty("line.separator");
 
     public List<MediaType> getSupportedMediaTypes() {
-        return Collections.singletonList(new MediaType("image", "jpeg"));
+        return Collections.singletonList(new MediaType("text", "plain"));
     }
 
-    public boolean supports(Class<? extends BufferedImage> clazz) {
-        return BufferedImage.class.equals(clazz);
+    public boolean supports(Class<? extends Object> clazz) {
+        return Object.class.equals(clazz);
     }
     
     /**
@@ -56,19 +59,39 @@ public class BufferedImageHttpMessageConverter implements HttpMessageConverter<B
 	/**
 	 * {@inheritDoc}
 	 */
-	public BufferedImage read(Class<? extends BufferedImage> clazz,
+	@SuppressWarnings("unchecked")
+	public String read(Class<? extends String> clazz,
 			HttpInputMessage inputMessage) throws IOException,
 			HttpMessageNotReadableException {
-		return ImageIO.read(inputMessage.getBody());
+		
+		final String data = convertInputStreamToString(inputMessage.getBody());		
+		
+		return data;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void write(BufferedImage t, MediaType contentType,
+	public void write(String t, MediaType contentType,
 			HttpOutputMessage outputMessage) throws IOException,
 			HttpMessageNotWritableException {
 		throw new UnsupportedOperationException("Not implemented");
 	}
+	
+	public static String convertInputStreamToString(InputStream io) {
+        final StringBuilder sb = new StringBuilder();
+        try {
+            final BufferedReader reader = new BufferedReader(new InputStreamReader(io, "UTF-8"));
+            String line = reader.readLine();
+            while (line != null) {
+                sb.append(line).append(LS);
+                line = reader.readLine();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("No se pudo obtener un InputStream", e);
+
+        }
+        return sb.toString();
+    }
 
 }

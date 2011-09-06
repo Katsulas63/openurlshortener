@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-package sample.resttemplate;
+package es.sopragroup.core.converter;
 
-import java.io.BufferedReader;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Collections;
 import java.util.List;
+import javax.imageio.ImageIO;
 
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.HttpOutputMessage;
@@ -30,19 +29,14 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 
-import com.myeclipseide.ws.Customer;
-import com.thoughtworks.xstream.XStream;
-
-public class XmlHttpMessageConverter implements HttpMessageConverter<List<Customer>> {
-	
-	public static String LS = System.getProperty("line.separator");
+public class BufferedImageHttpMessageConverter implements HttpMessageConverter<BufferedImage> {
 
     public List<MediaType> getSupportedMediaTypes() {
-        return Collections.singletonList(new MediaType("application", "xml"));
+        return Collections.singletonList(new MediaType("image", "jpeg"));
     }
 
-    public boolean supports(Class<? extends Object> clazz) {
-        return Object.class.equals(clazz);
+    public boolean supports(Class<? extends BufferedImage> clazz) {
+        return BufferedImage.class.equals(clazz);
     }
     
     /**
@@ -62,43 +56,19 @@ public class XmlHttpMessageConverter implements HttpMessageConverter<List<Custom
 	/**
 	 * {@inheritDoc}
 	 */
-	@SuppressWarnings("unchecked")
-	public List<Customer> read(Class<? extends List<Customer>> clazz,
+	public BufferedImage read(Class<? extends BufferedImage> clazz,
 			HttpInputMessage inputMessage) throws IOException,
 			HttpMessageNotReadableException {
-		
-		final String xmlData = convertInputStreamToString(inputMessage.getBody());		
-		final XStream xstream = new XStream();
-		xstream.alias("customers", List.class);
-		xstream.alias("customer", Customer.class);
-		List<Customer> customers = (List<Customer>)xstream.fromXML(xmlData);
-		
-		return customers;
+		return ImageIO.read(inputMessage.getBody());
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void write(List<Customer> t, MediaType contentType,
+	public void write(BufferedImage t, MediaType contentType,
 			HttpOutputMessage outputMessage) throws IOException,
 			HttpMessageNotWritableException {
 		throw new UnsupportedOperationException("Not implemented");
 	}
-	
-	public static String convertInputStreamToString(InputStream io) {
-        final StringBuilder sb = new StringBuilder();
-        try {
-            final BufferedReader reader = new BufferedReader(new InputStreamReader(io, "UTF-8"));
-            String line = reader.readLine();
-            while (line != null) {
-                sb.append(line).append(LS);
-                line = reader.readLine();
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("No se pudo obtener un InputStream", e);
-
-        }
-        return sb.toString();
-    }
 
 }

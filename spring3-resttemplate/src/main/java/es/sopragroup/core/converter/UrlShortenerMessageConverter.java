@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package sample.resttemplate;
+package es.sopragroup.core.converter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -30,12 +30,17 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 
-public class UrlShortenerMessageConverter implements HttpMessageConverter<String> {
+import com.thoughtworks.xstream.XStream;
+
+import es.sopragroup.core.entity.Customer;
+import es.sopragroup.core.entity.UrlShortable;
+
+public class UrlShortenerMessageConverter implements HttpMessageConverter<UrlShortable> {
 	
 	public static String LS = System.getProperty("line.separator");
 
     public List<MediaType> getSupportedMediaTypes() {
-        return Collections.singletonList(new MediaType("text", "plain"));
+        return Collections.singletonList(new MediaType("application", "xml"));
     }
 
     public boolean supports(Class<? extends Object> clazz) {
@@ -60,19 +65,22 @@ public class UrlShortenerMessageConverter implements HttpMessageConverter<String
 	 * {@inheritDoc}
 	 */
 	@SuppressWarnings("unchecked")
-	public String read(Class<? extends String> clazz,
+	public UrlShortable read(Class<? extends UrlShortable> clazz,
 			HttpInputMessage inputMessage) throws IOException,
 			HttpMessageNotReadableException {
 		
-		final String data = convertInputStreamToString(inputMessage.getBody());		
+		final String xmlData = convertInputStreamToString(inputMessage.getBody());		
+		final XStream xstream = new XStream();
+		xstream.alias("urlShortener", UrlShortable.class);
+		UrlShortable urlShortable = (UrlShortable)xstream.fromXML(xmlData);
 		
-		return data;
+		return urlShortable;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void write(String t, MediaType contentType,
+	public void write(UrlShortable t, MediaType contentType,
 			HttpOutputMessage outputMessage) throws IOException,
 			HttpMessageNotWritableException {
 		throw new UnsupportedOperationException("Not implemented");
