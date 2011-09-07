@@ -19,9 +19,10 @@ package es.sopragroup.core.dao.rest;
 import org.springframework.web.client.RestOperations;
 import org.springframework.xml.xpath.XPathOperations;
 
+import es.sopragroup.core.dao.IUrlShortenerDAO;
 import es.sopragroup.core.util.UrlUtil;
 
-public class UrlTxtClient extends AbstractUrlClient {
+public class UrlShortenerDAOImpl implements IUrlShortenerDAO {
 
 	private static final String DEFAULT_SERVER = "http://localhost:8090/url-shortener-ws";
 	private static final String REST_SUBCONTEXT = "/rest/";
@@ -32,7 +33,7 @@ public class UrlTxtClient extends AbstractUrlClient {
 
 	protected XPathOperations xpathTemplate;
 
-	public UrlTxtClient(RestOperations restTemplate,
+	public UrlShortenerDAOImpl(RestOperations restTemplate,
 			XPathOperations xpathTemplate) {
 		this.restTemplate = restTemplate;
 		this.xpathTemplate = xpathTemplate;

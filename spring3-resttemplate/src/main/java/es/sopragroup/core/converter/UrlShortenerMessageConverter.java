@@ -30,17 +30,12 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 
-import com.thoughtworks.xstream.XStream;
-
-import es.sopragroup.core.entity.Customer;
-import es.sopragroup.core.entity.UrlShortable;
-
-public class UrlShortenerMessageConverter implements HttpMessageConverter<UrlShortable> {
+public class UrlShortenerMessageConverter implements HttpMessageConverter<String> {
 	
 	public static String LS = System.getProperty("line.separator");
 
     public List<MediaType> getSupportedMediaTypes() {
-        return Collections.singletonList(new MediaType("application", "xml"));
+        return Collections.singletonList(new MediaType("text", "plain"));
     }
 
     public boolean supports(Class<? extends Object> clazz) {
@@ -65,22 +60,19 @@ public class UrlShortenerMessageConverter implements HttpMessageConverter<UrlSho
 	 * {@inheritDoc}
 	 */
 	@SuppressWarnings("unchecked")
-	public UrlShortable read(Class<? extends UrlShortable> clazz,
+	public String read(Class<? extends String> clazz,
 			HttpInputMessage inputMessage) throws IOException,
 			HttpMessageNotReadableException {
 		
-		final String xmlData = convertInputStreamToString(inputMessage.getBody());		
-		final XStream xstream = new XStream();
-		xstream.alias("urlShortener", UrlShortable.class);
-		UrlShortable urlShortable = (UrlShortable)xstream.fromXML(xmlData);
+		final String data = convertInputStreamToString(inputMessage.getBody());		
 		
-		return urlShortable;
+		return data;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void write(UrlShortable t, MediaType contentType,
+	public void write(String t, MediaType contentType,
 			HttpOutputMessage outputMessage) throws IOException,
 			HttpMessageNotWritableException {
 		throw new UnsupportedOperationException("Not implemented");
