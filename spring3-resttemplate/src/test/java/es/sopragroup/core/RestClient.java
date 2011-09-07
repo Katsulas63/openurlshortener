@@ -25,24 +25,25 @@ import es.sopragroup.core.dao.rest.UrlTxtClient;
 public class RestClient {
 
     public static void main(String[] args) {
-        if (args.length < 2) {
-            System.out.println("Usage: java " + RestClient.class.getName() + " [web-service] [url]");
+        if (args.length < 3) {
+            System.out.println("Usage: java " + RestClient.class.getName() + " [web-service] [url] [http-server]");
             System.exit(-1);
         }
         final String wsclient = args[0];
         final String url = args[1];
+        final String server = args[2];
         
         if ("shortenURL".equals(wsclient)) {
         	ApplicationContext applicationContext =
                     new ClassPathXmlApplicationContext("applicationContext.xml", RestClient.class);
         	UrlTxtClient client = applicationContext.getBean("urlTxtClient", UrlTxtClient.class);
-            final String shortUrl = client.shortenUrl(url);
+            final String shortUrl = client.shortenUrl(url, server);
             System.out.println("shortUrl="+shortUrl);
         } else if ("expandURL".equals(wsclient)) {
         	ApplicationContext applicationContext =
                     new ClassPathXmlApplicationContext("applicationContext.xml", RestClient.class);
         	UrlTxtClient client = applicationContext.getBean("urlTxtClient", UrlTxtClient.class);
-        	final String longUrl = client.expandUrl(url);
+        	final String longUrl = client.expandUrl(url, server);
             System.out.println("longUrl="+longUrl);
         }
         

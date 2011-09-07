@@ -23,11 +23,10 @@ import es.sopragroup.core.util.UrlUtil;
 
 public class UrlTxtClient extends AbstractUrlClient {
 
-	private static final String SOURCE_REST_SERVER = "http://localhost:8090/url-shortener-ws/rest/";
-	private static final String EXPAND_URL_REST_SERVER = SOURCE_REST_SERVER
-			+ "expandURL/{shortURL}";
-	private static final String SHORTEN_URL_REST_SERVER = SOURCE_REST_SERVER
-			+ "shortenURL/{longURL}";
+	private static final String DEFAULT_SERVER = "http://localhost:8090/url-shortener-ws";
+	private static final String REST_SUBCONTEXT = "/rest/";
+	private static final String EXPAND_URL_REST_OP = "expandURL/{shortURL}";
+	private static final String SHORTEN_URL_REST_OP = "shortenURL/{longURL}";
 
 	protected RestOperations restTemplate;
 
@@ -40,11 +39,16 @@ public class UrlTxtClient extends AbstractUrlClient {
 	}
 
 	public String expandUrl(String shortUrl) {
+		return expandUrl(shortUrl, DEFAULT_SERVER);
+	}
+	
+	public String expandUrl(String shortUrl, String server) {
 		String longUrl = "";
+		final String restServer = getRestServer(server, EXPAND_URL_REST_OP);
 		
 		try {
 			longUrl = restTemplate.getForObject(
-					EXPAND_URL_REST_SERVER, String.class,
+					restServer, String.class,
 					UrlUtil.encodeUrl(shortUrl));
 
 		} catch (org.springframework.web.client.HttpClientErrorException e) {
@@ -55,9 +59,15 @@ public class UrlTxtClient extends AbstractUrlClient {
 	}
 
 	public String shortenUrl(String longUrl) {
+		return shortenUrl(longUrl, DEFAULT_SERVER);
+	}
+	
+	public String shortenUrl(String longUrl, String server) {		
 		String shortUrl = "";
+		
+		final String restServer = getRestServer(server, SHORTEN_URL_REST_OP);
 		try {
-			shortUrl = restTemplate.getForObject(SHORTEN_URL_REST_SERVER,
+			shortUrl = restTemplate.getForObject(restServer,
 					String.class, UrlUtil.encodeUrl(longUrl));
 
 		} catch (org.springframework.web.client.HttpClientErrorException e) {
@@ -67,6 +77,12 @@ public class UrlTxtClient extends AbstractUrlClient {
 		}
 
 		return shortUrl;
+	}
+	
+	private String getRestServer(String httpServer, String restOperation) {
+		final StringBuilder restServer = new StringBuilder();
+		restServer.append(httpServer).append(REST_SUBCONTEXT).append(restOperation);
+		return restServer.toString();
 	}
 
 }
