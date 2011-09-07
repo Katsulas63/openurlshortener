@@ -1,4 +1,4 @@
-package es.sopragroup.core.util;
+package es.sopragroup.urlshortener.core.util;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
