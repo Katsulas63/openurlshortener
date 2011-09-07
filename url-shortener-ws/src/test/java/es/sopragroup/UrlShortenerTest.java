@@ -1,20 +1,13 @@
 package es.sopragroup;
 
-import es.sopragroup.core.util.UrlUtil;
+import es.sopragroup.core.util.UrlUtils;
 
 public class UrlShortenerTest {
-	
-	private static void genShortUrl(int value) {
-		final String surl = UrlUtil.generateShortUrl(value);
-		final String surlh = UrlUtil.hashMD5(surl);
-		
-		System.out.println("hash("+value+")="+surl);
-		System.out.println("hash(hash("+value+"))="+surlh);
-	}
 
 	public static void main(String[] args) {
 		for (int i=0; i<=20; ++i) {
-			genShortUrl(i);
+			final String shortUrl = UrlUtils.generateShortUrl(i);			
+			System.out.println(shortUrl);			
 		}
 	}
 }

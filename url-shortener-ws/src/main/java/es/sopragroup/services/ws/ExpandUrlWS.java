@@ -14,7 +14,7 @@ import com.sun.jersey.spi.resource.Singleton;
 
 import es.sopragroup.core.dao.IUrlShortableDAO;
 import es.sopragroup.core.entity.UrlShortable;
-import es.sopragroup.core.util.UrlUtil;
+import es.sopragroup.core.util.UrlUtils;
 
 @Component
 @Singleton
@@ -39,7 +39,7 @@ public class ExpandUrlWS {
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public String expandURL(@PathParam("shortURL")String shortUrl) {				
 		String result = "";
-		final UrlShortable url = this.getUrlShortableDAO().getUrlByShortUrl(UrlUtil.decodeUrl(shortUrl));
+		final UrlShortable url = this.getUrlShortableDAO().getUrlByShortUrl(UrlUtils.decodeUrl(shortUrl));
 		
 		if (url != null) {
 			result = url.getLongUrl();

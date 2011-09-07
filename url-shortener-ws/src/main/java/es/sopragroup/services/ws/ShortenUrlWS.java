@@ -14,7 +14,7 @@ import com.sun.jersey.spi.resource.Singleton;
 
 import es.sopragroup.core.dao.IUrlShortableDAO;
 import es.sopragroup.core.entity.UrlShortable;
-import es.sopragroup.core.util.UrlUtil;
+import es.sopragroup.core.util.UrlUtils;
 
 @Path("shortenURL")
 @Component
@@ -39,7 +39,7 @@ public class ShortenUrlWS {
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public String shortenURL(@PathParam("longURL") String longUrl) {		
 		String result = "";
-		longUrl = UrlUtil.decodeUrl(longUrl);
+		longUrl = UrlUtils.decodeUrl(longUrl);
 		final UrlShortable existingUrl = urlShortableDAO.getUrlByLongUrl(longUrl);		
 		if (existingUrl != null) {
 			result = "WARNING: This long-url has been already shorted to: "+existingUrl.getShortUrl();
@@ -47,7 +47,7 @@ public class ShortenUrlWS {
 			UrlShortable url = new UrlShortable();
 			url.setId(urlShortableDAO.getCountUrls().intValue());
 			url.setLongUrl(longUrl);
-			url.setShortUrl(UrlUtil.generateShortUrl(url.getId()));
+			url.setShortUrl(UrlUtils.generateShortUrl(url.getId()));
 			
 			url = urlShortableDAO.saveUrl(url);	
 			
