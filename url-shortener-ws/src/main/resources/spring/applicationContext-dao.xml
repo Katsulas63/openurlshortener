@@ -12,7 +12,7 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
 
 	<bean id="urlShortableDAO"
-        class="es.sopragroup.urlshortener.core.dao.mongodb.UrlShortableDAOImpl"
+        class="org.urlshortener.core.dao.mongodb.UrlShortableDAOImpl"
         autowire="byName">
         <property name="mongoDbFactory" ref="mongoDbFactory" />
         <property name="mongoTemplate" ref="mongoTemplate" />        

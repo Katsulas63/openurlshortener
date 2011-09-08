@@ -1,4 +1,4 @@
-package es.sopragroup.urlshortener.ws.config.cloud;
+package org.urlshortener.ws.config.cloud;
 
 import org.cloudfoundry.runtime.env.CloudEnvironment;
 import org.springframework.context.ApplicationContextInitializer;

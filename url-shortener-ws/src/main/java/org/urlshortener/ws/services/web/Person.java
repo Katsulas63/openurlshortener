@@ -1,4 +1,4 @@
-package es.sopragroup.urlshortener.ws.services.web;
+package org.urlshortener.ws.services.web;
 
 public class Person {
 

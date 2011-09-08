@@ -1,4 +1,4 @@
-package es.sopragroup.urlshortener.core.dao.mongodb;
+package org.urlshortener.core.dao.mongodb;
 
 import static org.springframework.data.document.mongodb.query.Criteria.where;
 
@@ -12,16 +12,17 @@ import org.springframework.data.document.mongodb.MongoTemplate;
 import org.springframework.data.document.mongodb.query.Criteria;
 import org.springframework.data.document.mongodb.query.Query;
 import org.springframework.stereotype.Component;
+import org.urlshortener.core.dao.IUrlShortableDAO;
+import org.urlshortener.core.entity.UrlShortable;
 
 import com.mongodb.DBCollection;
 import com.mongodb.MongoException;
 
-import es.sopragroup.urlshortener.core.dao.IUrlShortableDAO;
-import es.sopragroup.urlshortener.core.entity.UrlShortable;
 
 @Component("urlShortableDAO")
 public class UrlShortableDAOImpl implements IUrlShortableDAO {
 	
+	@SuppressWarnings("unused")
 	@Autowired(required=true)
 	private MongoDbFactory mongoDbFactory;
 

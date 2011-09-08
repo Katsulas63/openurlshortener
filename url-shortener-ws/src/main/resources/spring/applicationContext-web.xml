@@ -13,7 +13,7 @@
 
 	<mvc:default-servlet-handler/>
 	
-	<context:component-scan base-package="es.sopragroup.urlshortener.ws.services.web"/>
+	<context:component-scan base-package="org.urlshortener.ws.services.web"/>
 
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/"/>

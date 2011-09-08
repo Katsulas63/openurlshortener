@@ -1,4 +1,4 @@
-package es.sopragroup.urlshortener.ws.services;
+package org.urlshortener.ws.services;
 
 
 public interface IShortenUrlWS {

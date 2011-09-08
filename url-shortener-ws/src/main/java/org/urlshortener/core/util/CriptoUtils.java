@@ -1,4 +1,4 @@
-package es.sopragroup.urlshortener.core.util;
+package org.urlshortener.core.util;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

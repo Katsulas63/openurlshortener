@@ -1,4 +1,4 @@
-package es.sopragroup.urlshortener.ws.services.rest;
+package org.urlshortener.ws.services.rest;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -9,13 +9,13 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.urlshortener.core.dao.IUrlShortableDAO;
+import org.urlshortener.core.entity.UrlShortable;
+import org.urlshortener.core.util.UrlUtils;
+import org.urlshortener.ws.services.IShortenUrlWS;
 
 import com.sun.jersey.spi.resource.Singleton;
 
-import es.sopragroup.urlshortener.core.dao.IUrlShortableDAO;
-import es.sopragroup.urlshortener.core.entity.UrlShortable;
-import es.sopragroup.urlshortener.core.util.UrlUtils;
-import es.sopragroup.urlshortener.ws.services.IShortenUrlWS;
 
 @Path("shortenURL")
 @Component

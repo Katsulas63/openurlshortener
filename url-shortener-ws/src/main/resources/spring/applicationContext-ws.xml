@@ -12,12 +12,12 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
 
 	<bean id="expandUrlWS" lazy-init="false"
-        class="es.sopragroup.urlshortener.ws.services.rest.ExpandUrlWSImpl" autowire="byName">
+        class="org.urlshortener.ws.services.rest.ExpandUrlWSImpl" autowire="byName">
         <property name="urlShortableDAO" ref="urlShortableDAO" />   
     </bean>
     
     <bean id="shortenUrlWS" lazy-init="false"
-        class="es.sopragroup.urlshortener.ws.services.rest.ShortenUrlWSImpl" autowire="byName">
+        class="org.urlshortener.ws.services.rest.ShortenUrlWSImpl" autowire="byName">
         <property name="urlShortableDAO" ref="urlShortableDAO" />   
     </bean>
 

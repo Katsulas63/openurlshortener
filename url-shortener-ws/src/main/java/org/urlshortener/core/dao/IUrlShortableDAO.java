@@ -1,6 +1,6 @@
-package es.sopragroup.urlshortener.core.dao;
+package org.urlshortener.core.dao;
 
-import es.sopragroup.urlshortener.core.entity.UrlShortable;
+import org.urlshortener.core.entity.UrlShortable;
 
 public interface IUrlShortableDAO {
 	

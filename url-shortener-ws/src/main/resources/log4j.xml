@@ -11,12 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="es.sopragroup.services">
-		<level value="info" />
-	</logger>
-	
-	<!-- Application Loggers -->
-	<logger name="es.sopragroup.core">
+	<logger name="org.urlshortener">
 		<level value="info" />
 	</logger>
 	

@@ -1,4 +1,4 @@
-package es.sopragroup.urlshortener.ws.services.web;
+package org.urlshortener.ws.services.web;
 
 import static org.springframework.data.document.mongodb.query.Criteria.where;
 
