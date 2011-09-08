@@ -1,6 +1,6 @@
 package es.sopragroup;
 
-import es.sopragroup.core.util.UrlUtils;
+import es.sopragroup.urlshortener.core.util.UrlUtils;
 
 public class UrlShortenerTest {
 

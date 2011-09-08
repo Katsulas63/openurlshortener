@@ -1,4 +1,4 @@
-package es.sopragroup.core.entity;
+package es.sopragroup.urlshortener.core.entity;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
