@@ -6,7 +6,7 @@
 
 	<!-- DAOs -->
     
-    <bean id="urlShortenerWsDAO" class="es.sopragroup.urlshortener.core.dao.rest.UrlShortenerDAOImpl">
+    <bean id="urlShortenerWsDAO" class="org.urlshortener.core.dao.rest.UrlShortenerDAOImpl">
         <constructor-arg ref="restTemplate"/>
         <constructor-arg ref="xpathTemplate"/>
     </bean>
@@ -17,7 +17,7 @@
         <property name="messageConverters">
             <list>
                 <bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"/>
-                <bean class="es.sopragroup.urlshortener.core.converter.UrlShortenerMessageConverter"/>
+                <bean class="org.urlshortener.core.converter.UrlShortenerMessageConverter"/>
             </list>
         </property>
     </bean>
