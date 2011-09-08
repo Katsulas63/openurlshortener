@@ -16,6 +16,8 @@
 
 package es.sopragroup.urlshortener.core.dao.rest;
 
+import java.util.StringTokenizer;
+
 import org.springframework.web.client.RestOperations;
 import org.springframework.xml.xpath.XPathOperations;
 
@@ -56,6 +58,8 @@ public class UrlShortenerDAOImpl implements IUrlShortenerDAO {
 			longUrl = "ERROR: " + e.getLocalizedMessage();
 		}
 		
+		longUrl = prepareUrl(longUrl);
+		
 		return longUrl;
 	}
 
@@ -76,6 +80,8 @@ public class UrlShortenerDAOImpl implements IUrlShortenerDAO {
 		} catch (org.springframework.web.client.ResourceAccessException e) {
 			shortUrl = "ERROR: " + e.getLocalizedMessage();
 		}
+		
+		shortUrl = prepareUrl(shortUrl);
 
 		return shortUrl;
 	}
@@ -84,6 +90,18 @@ public class UrlShortenerDAOImpl implements IUrlShortenerDAO {
 		final StringBuilder restServer = new StringBuilder();
 		restServer.append(httpServer).append(REST_SUBCONTEXT).append(restOperation);
 		return restServer.toString();
+	}
+	
+	private String prepareUrl(String url) {
+		String result = url;
+		
+		final StringTokenizer st = new StringTokenizer(url, "\n\r");
+		
+		if (st.countTokens() == 1) {
+			result = st.nextToken();
+		}
+		
+		return result;
 	}
 
 }

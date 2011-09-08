@@ -59,7 +59,6 @@ public class UrlShortenerMessageConverter implements HttpMessageConverter<String
 	/**
 	 * {@inheritDoc}
 	 */
-	@SuppressWarnings("unchecked")
 	public String read(Class<? extends String> clazz,
 			HttpInputMessage inputMessage) throws IOException,
 			HttpMessageNotReadableException {

@@ -14,9 +14,16 @@ import es.sopragroup.urlshortener.core.dao.IUrlShortenerDAO;
 public class RestClientTest {
 	
 	private static final String CLOUD_HTTP_SERVER = "http://url-shortener-ws.cloudfoundry.com";		
-	private static final Boolean LOCAL_MODE = Boolean.FALSE;	
-	private static final String LONG_URL = "http://www.facebook.com";	
-	private static final String SHORT_URL = "http://ushrt.tk/68148555";
+	private static final Boolean LOCAL_MODE = Boolean.TRUE;	
+	private static final String LONG_URL = "http://www.facebook.com/settings";	
+	private static final String SHORT_URL = "http://ushrt.tk/66f887";
+	
+	private static final String SHORTEN_URL_ERROR = "Error shortening Url:\n";
+	
+	private static final String EXPAND_URL_ERROR = "Error expanding Url:\n";
+	private static final String EXPAND_URL_ERROR1 = "ERROR: The specified short-url cannot be expanded.";
+	
+	
 	
 	@Autowired
 	private IUrlShortenerDAO urlShortenerWsDAO;
@@ -33,7 +40,7 @@ public class RestClientTest {
 			shortUrl = urlShortenerWsDAO.shortenUrl(randomUrl, CLOUD_HTTP_SERVER);
 		}
 		
-		Assert.notNull(shortUrl);
+		Assert.notNull(shortUrl, SHORTEN_URL_ERROR+"shortUrl is null");
 		
 		if (LOCAL_MODE) {
 			longUrl = urlShortenerWsDAO.expandUrl(shortUrl);
@@ -41,9 +48,11 @@ public class RestClientTest {
 			longUrl = urlShortenerWsDAO.expandUrl(shortUrl, CLOUD_HTTP_SERVER);
 		}
 		
-		Assert.notNull(longUrl);
+		Assert.notNull(longUrl, EXPAND_URL_ERROR+"longUrl is null");
 		
-		Assert.isTrue(randomUrl.equalsIgnoreCase(longUrl));
+		Assert.isTrue(!longUrl.equalsIgnoreCase(EXPAND_URL_ERROR1), EXPAND_URL_ERROR+EXPAND_URL_ERROR1);
+		
+		Assert.isTrue(randomUrl.equalsIgnoreCase(longUrl), "Error: shortUrl and longUrl are different.");
 	}
 	
 	@Test
@@ -56,7 +65,7 @@ public class RestClientTest {
 			shortUrl = urlShortenerWsDAO.shortenUrl(LONG_URL, CLOUD_HTTP_SERVER);
 		}
 		
-		Assert.notNull(shortUrl);
+		Assert.notNull(shortUrl, SHORTEN_URL_ERROR+"shortUrl is null");
 	}
 	
 	@Test
@@ -69,7 +78,9 @@ public class RestClientTest {
 			longUrl = urlShortenerWsDAO.expandUrl(SHORT_URL, CLOUD_HTTP_SERVER);
 		}
 		
-		Assert.notNull(longUrl);
+		Assert.notNull(longUrl, EXPAND_URL_ERROR+"longUrl is null");
+		
+		Assert.isTrue(!longUrl.equalsIgnoreCase(EXPAND_URL_ERROR1), EXPAND_URL_ERROR+EXPAND_URL_ERROR1);
 	}
 
 	/**
