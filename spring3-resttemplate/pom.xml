@@ -31,6 +31,27 @@
 			<id>s2-external</id>
 			<url>http://repository.springsource.com/maven/bundles/external</url>
 		</repository>
+		<!-- For testing against latest Spring snapshots -->
+		<repository>
+			<id>org.springframework.maven.snapshot</id>
+			<name>Spring Maven Snapshot Repository</name>
+			<url>http://maven.springframework.org/snapshot</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<!-- For developing against latest Spring milestones -->
+		<repository>
+			<id>org.springframework.maven.milestone</id>
+			<name>Spring Maven Milestone Repository</name>
+			<url>http://maven.springframework.org/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
 	</repositories>
 	<build>
 		<plugins>
@@ -45,9 +66,29 @@
 		</plugins>
 	</build>
 	<dependencies>
+		<!-- CloudFoundry -->
+		<dependency>
+			<groupId>org.cloudfoundry</groupId>
+			<artifactId>cloudfoundry-runtime</artifactId>
+			<version>${cloudfoundry.version}</version>
+		</dependency>			
+		
+		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+			<exclusions>
+				<!-- Exclude Commons Logging in favor of SLF4j -->
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
@@ -59,16 +100,69 @@
 			<groupId>org.springframework.ws</groupId>
 			<artifactId>org.springframework.xml</artifactId>
 			<version>1.5.5.A</version>
+		</dependency>		
+		
+		<!-- AspectJ -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${aspectj.version}</version>
 		</dependency>
+		
+		<!-- Data -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-mongodb</artifactId>
+			<version>${spring.mongodb.version}</version>
+		</dependency>
+		
+		<!-- Logging -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.15</version>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.mail</groupId>
+					<artifactId>mail</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.jms</groupId>
+					<artifactId>jms</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.sun.jdmk</groupId>
+					<artifactId>jmxtools</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.sun.jmx</groupId>
+					<artifactId>jmxri</artifactId>
+				</exclusion>
+			</exclusions>
+			<scope>runtime</scope>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.apache.log4j</groupId>
 			<artifactId>com.springsource.org.apache.log4j</artifactId>
 			<version>1.2.15</version>
-		</dependency>
-		<dependency>
-			<groupId>xstream</groupId>
-			<artifactId>xstream</artifactId>
-			<version>1.2.2</version>
 		</dependency>
 
 		<!-- test -->
@@ -82,12 +176,16 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>${spring.version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	<properties>
-		<spring.version>3.0.5.RELEASE</spring.version>
-		<java.version>1.5</java.version>
-		<servlet-api.version>2.5</servlet-api.version>
+		<cloudfoundry.version>0.7.1</cloudfoundry.version>
+		<spring.mongodb.version>1.0.0.M3</spring.mongodb.version>
+		<spring.version>3.1.0.M2</spring.version>
+		<aspectj.version>1.6.11</aspectj.version>
+		<slf4j.version>1.5.10</slf4j.version>
+		<java.version>1.6</java.version>
 		<junit.version>4.7</junit.version>
 	</properties>
 </project>

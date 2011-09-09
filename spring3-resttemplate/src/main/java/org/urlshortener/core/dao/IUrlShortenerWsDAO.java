@@ -1,7 +1,7 @@
 
 package org.urlshortener.core.dao;
 
-public interface IUrlShortenerDAO {
+public interface IUrlShortenerWsDAO {
 
 	/**
 	 * 

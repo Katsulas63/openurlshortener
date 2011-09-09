@@ -20,11 +20,11 @@ import java.util.StringTokenizer;
 
 import org.springframework.web.client.RestOperations;
 import org.springframework.xml.xpath.XPathOperations;
-import org.urlshortener.core.dao.IUrlShortenerDAO;
-import org.urlshortener.core.util.UrlUtil;
+import org.urlshortener.core.dao.IUrlShortenerWsDAO;
+import org.urlshortener.core.util.UrlUtils;
 
 
-public class UrlShortenerDAOImpl implements IUrlShortenerDAO {
+public class UrlShortenerWsDAOImpl implements IUrlShortenerWsDAO {
 
 	private static final String DEFAULT_SERVER = "http://localhost:8090/url-shortener-ws";
 	private static final String REST_SUBCONTEXT = "/rest/";
@@ -35,7 +35,7 @@ public class UrlShortenerDAOImpl implements IUrlShortenerDAO {
 
 	protected XPathOperations xpathTemplate;
 
-	public UrlShortenerDAOImpl(RestOperations restTemplate,
+	public UrlShortenerWsDAOImpl(RestOperations restTemplate,
 			XPathOperations xpathTemplate) {
 		this.restTemplate = restTemplate;
 		this.xpathTemplate = xpathTemplate;
@@ -52,7 +52,7 @@ public class UrlShortenerDAOImpl implements IUrlShortenerDAO {
 		try {
 			longUrl = restTemplate.getForObject(
 					restServer, String.class,
-					UrlUtil.encodeUrl(shortUrl));
+					UrlUtils.encodeUrl(shortUrl));
 
 		} catch (org.springframework.web.client.HttpClientErrorException e) {
 			longUrl = "ERROR: " + e.getLocalizedMessage();
@@ -73,7 +73,7 @@ public class UrlShortenerDAOImpl implements IUrlShortenerDAO {
 		final String restServer = getRestServer(server, SHORTEN_URL_REST_OP);
 		try {
 			shortUrl = restTemplate.getForObject(restServer,
-					String.class, UrlUtil.encodeUrl(longUrl));
+					String.class, UrlUtils.encodeUrl(longUrl));
 
 		} catch (org.springframework.web.client.HttpClientErrorException e) {
 			shortUrl = "ERROR: " + e.getLocalizedMessage();
