@@ -5,14 +5,14 @@
 
 	<context-param>
 		<param-name>contextInitializerClasses</param-name>
-		<param-value>org.urlshortener.ws.config.cloud.CloudApplicationContextInitializer</param-value>
+		<param-value>org.urlshortener.ws.cloud.CloudApplicationContextInitializer</param-value>
 	</context-param>
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			classpath:/spring/applicationContext-config.xml,
-			classpath:/spring/applicationContext-dao.xml,
+			classpath*:/spring/applicationContext-dao.xml,
 			classpath:/spring/applicationContext-ws.xml
 		</param-value>
 	</context-param>
