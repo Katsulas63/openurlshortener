@@ -1,18 +1,26 @@
-package org.urlshortener.core;
+package org.urlshortener.core.dao;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 import org.urlshortener.core.dao.IUrlShortenerWsDAO;
 
+/**
+ * 
+ * @author cyague
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = RestClientTest.APPLICATION_CONTEXT)
-public class RestClientTest {
+@ContextConfiguration(locations = UrlShortenerWsDAOTest.APPLICATION_CONTEXT)
+public class UrlShortenerWsDAOTest {
+	
+	/**
+	 * constants<br>
+	 * =========
+	 */
 	
 	public static final String APPLICATION_CONTEXT = "classpath:/spring/applicationContext-tests.xml";
 	
@@ -26,20 +34,24 @@ public class RestClientTest {
 	private static final String EXPAND_URL_ERROR = "Error expanding Url:\n";
 	private static final String EXPAND_URL_ERROR1 = "ERROR: The specified short-url cannot be expanded.";
 
+	/**
+	 * fields<br>
+	 * ======
+	 */
+	
 	@Autowired
 	private IUrlShortenerWsDAO urlShortenerWsDAO;
-	
-	public RestClientTest() {
-		ConfigurableApplicationContext applicationContext = new ClassPathXmlApplicationContext(APPLICATION_CONTEXT);
-		applicationContext.getEnvironment().setActiveProfiles("default");
-	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testService() {
 		
 		String shortUrl = null, longUrl = null;
 
-		final String randomUrl = LONG_URL + "/" + Math.random();
+		final Double randomValue = Math.random() * 1000;
+		final String randomUrl = LONG_URL + "/" + randomValue.intValue();
 
 		if (LOCAL_MODE) {
 			shortUrl = urlShortenerWsDAO.shortenUrl(randomUrl);
@@ -65,6 +77,9 @@ public class RestClientTest {
 				"Error: shortUrl and longUrl are different.");
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testShortenUrlService() {
 		String shortUrl = null;
@@ -79,6 +94,9 @@ public class RestClientTest {
 		Assert.notNull(shortUrl, SHORTEN_URL_ERROR + "shortUrl is null");
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testExpandUrlService() {
 		String longUrl = null;
@@ -94,6 +112,11 @@ public class RestClientTest {
 		Assert.isTrue(!longUrl.equalsIgnoreCase(EXPAND_URL_ERROR1),
 				EXPAND_URL_ERROR + EXPAND_URL_ERROR1);
 	}
+	
+	/**
+	 * getter & setters<br>
+	 * ================
+	 */
 
 	/**
 	 * @param urlShortenerWsDAO

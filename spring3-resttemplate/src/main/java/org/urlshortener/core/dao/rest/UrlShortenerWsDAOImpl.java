@@ -21,38 +21,72 @@ import java.util.StringTokenizer;
 import org.springframework.web.client.RestOperations;
 import org.springframework.xml.xpath.XPathOperations;
 import org.urlshortener.core.dao.IUrlShortenerWsDAO;
-import org.urlshortener.core.util.UrlUtils;
 
-
+/**
+ * 
+ * @author cyague
+ *
+ */
 public class UrlShortenerWsDAOImpl implements IUrlShortenerWsDAO {
 
+	/**
+	 * constants<br>
+	 * =========
+	 */
+	
 	private static final String DEFAULT_SERVER = "http://localhost:8090/url-shortener-ws";
 	private static final String REST_SUBCONTEXT = "/rest/";
 	private static final String EXPAND_URL_REST_OP = "expandURL/{shortURL}";
 	private static final String SHORTEN_URL_REST_OP = "shortenURL/{longURL}";
 
+	/**
+	 * fields<br>
+	 * ======
+	 */
+	
 	protected RestOperations restTemplate;
 
 	protected XPathOperations xpathTemplate;
-
+	
+	/**
+	 * constructors<br>
+	 * ============
+	 */
+	
+	/**
+	 * 
+	 * @param restTemplate
+	 * @param xpathTemplate
+	 */
 	public UrlShortenerWsDAOImpl(RestOperations restTemplate,
 			XPathOperations xpathTemplate) {
 		this.restTemplate = restTemplate;
 		this.xpathTemplate = xpathTemplate;
 	}
+	
+	/**
+	 * public methods<br>
+	 * ==============
+	 */
 
-	public String expandUrl(String shortUrl) {
-		return expandUrl(shortUrl, DEFAULT_SERVER);
+	/**
+	 * {@inheritDoc}
+	 */
+	public String expandUrl(String encodeShortUrl) {
+		return expandUrl(encodeShortUrl, DEFAULT_SERVER);
 	}
 	
-	public String expandUrl(String shortUrl, String server) {
+	/**
+	 * {@inheritDoc}
+	 */
+	public String expandUrl(String encodeShortUrl, String server) {
 		String longUrl = "";
 		final String restServer = getRestServer(server, EXPAND_URL_REST_OP);
 		
 		try {
 			longUrl = restTemplate.getForObject(
 					restServer, String.class,
-					UrlUtils.encodeUrl(shortUrl));
+					encodeShortUrl);
 
 		} catch (org.springframework.web.client.HttpClientErrorException e) {
 			longUrl = "ERROR: " + e.getLocalizedMessage();
@@ -63,17 +97,23 @@ public class UrlShortenerWsDAOImpl implements IUrlShortenerWsDAO {
 		return longUrl;
 	}
 
-	public String shortenUrl(String longUrl) {
-		return shortenUrl(longUrl, DEFAULT_SERVER);
+	/**
+	 * {@inheritDoc}
+	 */
+	public String shortenUrl(String encodeLongUrl) {
+		return shortenUrl(encodeLongUrl, DEFAULT_SERVER);
 	}
 	
-	public String shortenUrl(String longUrl, String server) {		
+	/**
+	 * {@inheritDoc}
+	 */
+	public String shortenUrl(String encodeLongUrl, String server) {		
 		String shortUrl = "";
 		
 		final String restServer = getRestServer(server, SHORTEN_URL_REST_OP);
 		try {
 			shortUrl = restTemplate.getForObject(restServer,
-					String.class, UrlUtils.encodeUrl(longUrl));
+					String.class, encodeLongUrl);
 
 		} catch (org.springframework.web.client.HttpClientErrorException e) {
 			shortUrl = "ERROR: " + e.getLocalizedMessage();
@@ -86,12 +126,28 @@ public class UrlShortenerWsDAOImpl implements IUrlShortenerWsDAO {
 		return shortUrl;
 	}
 	
+	/**
+	 * auxiliary methods<br>
+	 * =================
+	 */
+	
+	/**
+	 * 
+	 * @param httpServer
+	 * @param restOperation
+	 * @return
+	 */	
 	private String getRestServer(String httpServer, String restOperation) {
 		final StringBuilder restServer = new StringBuilder();
 		restServer.append(httpServer).append(REST_SUBCONTEXT).append(restOperation);
 		return restServer.toString();
 	}
 	
+	/**
+	 * 
+	 * @param url
+	 * @return
+	 */
 	private String prepareUrl(String url) {
 		String result = url;
 		

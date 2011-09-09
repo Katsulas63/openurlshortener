@@ -1,6 +1,11 @@
 
 package org.urlshortener.core.dao;
 
+/**
+ * 
+ * @author cyague
+ *
+ */
 public interface IUrlShortenerWsDAO {
 
 	/**
