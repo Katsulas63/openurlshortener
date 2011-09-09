@@ -12,7 +12,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			classpath:/spring/applicationContext-config.xml,
-			classpath*:/spring/applicationContext-dao.xml,
+			classpath*:/spring/applicationContext-service.xml,
 			classpath:/spring/applicationContext-ws.xml
 		</param-value>
 	</context-param>
@@ -49,7 +49,7 @@
       </init-param>
       <init-param>
         <param-name>com.sun.jersey.config.property.packages</param-name>
-        <param-value>org.urlshortener.ws.services.rest</param-value>
+        <param-value>org.urlshortener.ws.rest</param-value>
       </init-param>
       </servlet>
     <servlet-mapping>

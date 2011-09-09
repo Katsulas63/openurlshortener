@@ -11,14 +11,17 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
 
-	<bean id="expandUrlWS" lazy-init="false"
-        class="org.urlshortener.ws.services.rest.ExpandUrlWSImpl" autowire="byName">
-        <property name="urlShortableDAO" ref="urlShortableDAO" />   
+	<bean id="abstractWs" abstract="true" lazy-init="false"
+        class="org.urlshortener.ws.rest.AbstractUrlWS">
+        <property name="manager" ref="urlShortableManager" />   
+    </bean>
+
+	<bean id="expandUrlWS" parent="abstractWs" lazy-init="false"
+        class="org.urlshortener.ws.rest.ExpandUrlWS">
     </bean>
     
-    <bean id="shortenUrlWS" lazy-init="false"
-        class="org.urlshortener.ws.services.rest.ShortenUrlWSImpl" autowire="byName">
-        <property name="urlShortableDAO" ref="urlShortableDAO" />   
+    <bean id="shortenUrlWS" parent="abstractWs" lazy-init="false"
+        class="org.urlshortener.ws.rest.ShortenUrlWS">  
     </bean>
 
 </beans>

@@ -1,4 +1,4 @@
-package org.urlshortener.ws.services.web;
+package org.urlshortener.ws.web;
 
 public class Person {
 
