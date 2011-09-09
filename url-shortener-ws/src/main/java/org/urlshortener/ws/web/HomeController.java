@@ -1,31 +1,22 @@
 package org.urlshortener.ws.web;
 
-import static org.springframework.data.document.mongodb.query.Criteria.where;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-import java.util.Random;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.dao.DataAccessException;
-import org.springframework.data.document.mongodb.CollectionCallback;
 import org.springframework.data.document.mongodb.MongoDbFactory;
 import org.springframework.data.document.mongodb.MongoTemplate;
-import org.springframework.data.document.mongodb.query.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.mongodb.DBCollection;
-import com.mongodb.MongoException;
 
 /**
  * Handles requests for the application home page.
@@ -49,12 +40,7 @@ public class HomeController {
 		if (mongoDbFactory != null) {
 			services.add("MongoDB: " + mongoDbFactory.getDb().getMongo().getAddress());
 		}
-		Random generator = new Random();
-		Person p = new Person("Joe Cloud-" + generator.nextInt(100), generator.nextInt(100));
-		mongoTemplate.save(p);
-		List<Person> people = mongoTemplate.find(new Query(where("age").lt(100)), Person.class);
-
-		model.addAttribute("people", people);
+		
 		model.addAttribute("services", services);
 		model.addAttribute("serviceProperties", getServicePropertiesAsList());
 
@@ -104,22 +90,6 @@ public class HomeController {
 			}
 		}
 		return propList;
-	}
-
-	@RequestMapping("/deleteAll")
-	public void deleteAll(HttpServletResponse response) throws IOException {
-		response.setContentType("text/plain");
-		PrintWriter out = response.getWriter();
-		long count = mongoTemplate.execute(Person.class,
-				new CollectionCallback<Long>() {
-					@Override
-					public Long doInCollection(DBCollection collection)
-							throws MongoException, DataAccessException {
-						return collection.count();
-					}
-				});
-		out.println("Deleted " + count + " entries");
-		mongoTemplate.dropCollection("Person");
 	}
 
 }
