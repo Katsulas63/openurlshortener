@@ -17,7 +17,7 @@ public class RestClientTest {
 	public static final String APPLICATION_CONTEXT = "classpath:/spring/applicationContext-tests.xml";
 	
 	private static final String CLOUD_HTTP_SERVER = "http://url-shortener-ws.cloudfoundry.com";
-	private static final Boolean LOCAL_MODE = Boolean.FALSE;
+	private static final Boolean LOCAL_MODE = Boolean.TRUE;
 	private static final String LONG_URL = "http://www.facebook.com/settings";
 	private static final String SHORT_URL = "http://ushrt.tk/66f887";
 
