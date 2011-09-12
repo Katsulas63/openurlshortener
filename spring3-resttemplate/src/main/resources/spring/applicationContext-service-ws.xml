@@ -13,10 +13,10 @@
 
 	<!-- Managers -->
     
-    <bean id="urlShortableManager" class="org.urlshortener.core.service.impl.UrlShortableManagerImpl">
-        <property name="dao" ref="urlShortableDAO" />     
+    <bean id="urlShortenerWsManager" class="org.urlshortener.core.service.impl.UrlShortenerWsManagerImpl">
+        <property name="dao" ref="urlShortenerWsDAO"/>
     </bean>
     
-    <import resource="classpath:/spring/applicationContext-dao.xml"/>
+    <import resource="classpath:/spring/applicationContext-dao-ws.xml"/>
     
 </beans>

@@ -11,12 +11,10 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
 
-	<!-- Managers -->
-    
-    <bean id="urlShortableManager" class="org.urlshortener.core.service.impl.UrlShortableManagerImpl">
-        <property name="dao" ref="urlShortableDAO" />     
-    </bean>
-    
-    <import resource="classpath:/spring/applicationContext-dao.xml"/>
-    
+	<mongo:db-factory id="mongoDbFactory" dbname="pwdtest" host="127.0.0.1" port="27017" username="test_user" password="efgh"/>
+	
+	<bean id="mongoTemplate" class="org.springframework.data.document.mongodb.MongoTemplate">
+		<constructor-arg ref="mongoDbFactory"/> 	
+	</bean>
+
 </beans>

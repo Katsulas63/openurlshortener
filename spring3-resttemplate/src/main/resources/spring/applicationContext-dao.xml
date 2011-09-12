@@ -13,11 +13,6 @@
 
 	<!-- DAOs -->
     
-    <bean id="urlShortenerWsDAO" class="org.urlshortener.core.dao.rest.UrlShortenerWsDAOImpl">
-        <constructor-arg ref="restTemplate"/>
-        <constructor-arg ref="xpathTemplate"/>
-    </bean>
-    
     <bean id="urlShortableDAO"
         class="org.urlshortener.core.dao.mongodb.UrlShortableDAOImpl"
         autowire="byName">
@@ -25,17 +20,4 @@
         <property name="mongoTemplate" ref="mongoTemplate" />        
     </bean>
     
-    <!-- Converters -->
-
-    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
-        <property name="messageConverters">
-            <list>
-                <bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"/>
-                <bean class="org.urlshortener.core.converter.UrlShortenerMessageConverter"/>
-            </list>
-        </property>
-    </bean>
-   
-    <bean id="xpathTemplate" class="org.springframework.xml.xpath.Jaxp13XPathTemplate"/>
-
 </beans>

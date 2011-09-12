@@ -11,12 +11,24 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
 
-	<!-- Managers -->
+	<!-- DAOs -->
     
-    <bean id="urlShortableManager" class="org.urlshortener.core.service.impl.UrlShortableManagerImpl">
-        <property name="dao" ref="urlShortableDAO" />     
+    <bean id="urlShortenerWsDAO" class="org.urlshortener.core.dao.rest.UrlShortenerWsDAOImpl">
+        <constructor-arg ref="restTemplate"/>
+        <constructor-arg ref="xpathTemplate"/>
     </bean>
     
-    <import resource="classpath:/spring/applicationContext-dao.xml"/>
-    
+    <!-- Converters -->
+
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"/>
+                <bean class="org.urlshortener.core.converter.UrlShortenerMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+   
+    <bean id="xpathTemplate" class="org.springframework.xml.xpath.Jaxp13XPathTemplate"/>
+
 </beans>

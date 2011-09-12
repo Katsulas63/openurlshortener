@@ -42,8 +42,8 @@ public class UrlShortableDAOImpl implements IUrlShortableDAO {
 		return urls;
 	}
 
-	/* (non-Javadoc)
-	 * @see es.sopragroup.core.dao.mongodb.IUrlShortableDAO#getCountUrls()
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Long getCountUrls() {
@@ -71,8 +71,8 @@ public class UrlShortableDAOImpl implements IUrlShortableDAO {
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see es.sopragroup.core.dao.mongodb.IUrlShortableDAO#getUrlByShortUrl(java.lang.String)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public UrlShortable getUrlByShortUrl(String shortUrl) {
@@ -80,8 +80,8 @@ public class UrlShortableDAOImpl implements IUrlShortableDAO {
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see es.sopragroup.core.dao.mongodb.IUrlShortableDAO#getUrlByLongUrl(java.lang.String)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public UrlShortable getUrlByLongUrl(String longUrl) {
