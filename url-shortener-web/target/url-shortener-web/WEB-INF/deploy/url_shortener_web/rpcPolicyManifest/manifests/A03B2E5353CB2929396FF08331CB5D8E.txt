@@ -1,2 +1,0 @@
-serviceClass: org.urlshortener.web.client.GreetingService
-path: 61C5D9A5F6E6E1A09B4E46C10DDD4C33.gwt.rpc
