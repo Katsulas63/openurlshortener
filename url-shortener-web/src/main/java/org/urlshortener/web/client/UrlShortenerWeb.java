@@ -264,7 +264,9 @@ public class UrlShortenerWeb implements EntryPoint {
 								dialogBox.setText(TITLE);
 								serverResponseLabel
 										.removeStyleName("serverResponseLabelError");
-								serverResponseLabel.setHTML(result);
+								final StringBuilder link = new StringBuilder();
+								link.append("<a target='_blank' href='").append(result).append("'>").append(result).append("</a>");
+								serverResponseLabel.setHTML(link.toString());
 								dialogBox.center();
 								closeButton.setFocus(true);
 							}
