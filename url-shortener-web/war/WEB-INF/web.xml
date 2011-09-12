@@ -4,21 +4,43 @@
     "http://java.sun.com/dtd/web-app_2_3.dtd">
 
 <web-app>
-  
-  <!-- Servlets -->
-  <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>org.urlshortener.web.server.GreetingServiceImpl</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/urlshortenerweb/greet</url-pattern>
-  </servlet-mapping>
-  
-  <!-- Default page to serve -->
-  <welcome-file-list>
-    <welcome-file>UrlShortenerWeb.html</welcome-file>
-  </welcome-file-list>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath*:/spring/applicationContext-dao-ws.xml,
+			classpath*:/spring/applicationContext-service-ws.xml		
+		</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- Servlets -->
+	<servlet>
+		<servlet-name>shorteringUrlServlet</servlet-name>
+		<servlet-class>org.urlshortener.web.server.ShorteringUrlServiceImpl</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>expandingUrlServlet</servlet-name>
+		<servlet-class>org.urlshortener.web.server.ExpandingUrlServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>shorteringUrlServlet</servlet-name>
+		<url-pattern>/urlshortenerweb/shorten</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>expandingUrlServlet</servlet-name>
+		<url-pattern>/urlshortenerweb/expand</url-pattern>
+	</servlet-mapping>
+
+	<!-- Default page to serve -->
+	<welcome-file-list>
+		<welcome-file>UrlShortenerWeb.html</welcome-file>
+	</welcome-file-list>
 
 </web-app>

@@ -36,8 +36,15 @@ public class UrlShortenerWeb implements EntryPoint {
 	 * Create a remote service proxy to talk to the server-side Greeting
 	 * service.
 	 */
-	private final GreetingServiceAsync greetingService = GWT
-			.create(GreetingService.class);
+	private final ShorteringUrlServiceAsync shorteningUrlService = GWT
+			.create(ShorteringUrlService.class);
+	
+	/**
+	 * Create a remote service proxy to talk to the server-side Greeting
+	 * service.
+	 */
+	private final ExpandingUrlServiceAsync expandingUrlService = GWT
+			.create(ExpandingUrlService.class);
 
 	private void onModuleLoadShortenUrl() {
 		final Button button = new Button("Make Short URL");
@@ -124,12 +131,12 @@ public class UrlShortenerWeb implements EntryPoint {
 				button.setEnabled(false);
 				textToServerLabel.setText(textToServer);
 				serverResponseLabel.setText("");
-				greetingService.greetServer(textToServer,
+				shorteningUrlService.shortenUrlServer(textToServer,
 						new AsyncCallback<String>() {
 							public void onFailure(Throwable caught) {
 								// Show the RPC error message to the user
 								dialogBox
-										.setText("Remote Procedure Call - Failure");
+										.setText(TITLE+" - Failure");
 								serverResponseLabel
 										.addStyleName("serverResponseLabelError");
 								serverResponseLabel.setHTML(SERVER_ERROR);
@@ -138,7 +145,7 @@ public class UrlShortenerWeb implements EntryPoint {
 							}
 
 							public void onSuccess(String result) {
-								dialogBox.setText("Remote Procedure Call");
+								dialogBox.setText(TITLE);
 								serverResponseLabel
 										.removeStyleName("serverResponseLabelError");
 								serverResponseLabel.setHTML(result);
@@ -240,12 +247,12 @@ public class UrlShortenerWeb implements EntryPoint {
 				button.setEnabled(false);
 				textToServerLabel.setText(textToServer);
 				serverResponseLabel.setText("");
-				greetingService.greetServer(textToServer,
+				expandingUrlService.expandUrlServer(textToServer,
 						new AsyncCallback<String>() {
 							public void onFailure(Throwable caught) {
 								// Show the RPC error message to the user
 								dialogBox
-										.setText("Remote Procedure Call - Failure");
+										.setText(TITLE+" - Failure");
 								serverResponseLabel
 										.addStyleName("serverResponseLabelError");
 								serverResponseLabel.setHTML(SERVER_ERROR);
@@ -254,7 +261,7 @@ public class UrlShortenerWeb implements EntryPoint {
 							}
 
 							public void onSuccess(String result) {
-								dialogBox.setText("Remote Procedure Call");
+								dialogBox.setText(TITLE);
 								serverResponseLabel
 										.removeStyleName("serverResponseLabelError");
 								serverResponseLabel.setHTML(result);
