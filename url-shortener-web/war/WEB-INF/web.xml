@@ -8,17 +8,17 @@
   <!-- Servlets -->
   <servlet>
     <servlet-name>greetServlet</servlet-name>
-    <servlet-class>es.sopragroup.urlshortener.web.server.GreetingServiceImpl</servlet-class>
+    <servlet-class>org.urlshortener.web.server.GreetingServiceImpl</servlet-class>
   </servlet>
   
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/url_shortener_web/greet</url-pattern>
+    <url-pattern>/urlshortenerweb/greet</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>Url_shortener_web.html</welcome-file>
+    <welcome-file>UrlShortenerWeb.html</welcome-file>
   </welcome-file-list>
 
 </web-app>
