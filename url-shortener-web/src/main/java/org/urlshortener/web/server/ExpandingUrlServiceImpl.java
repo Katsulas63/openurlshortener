@@ -21,7 +21,7 @@ public class ExpandingUrlServiceImpl extends RemoteServiceServlet implements
 			return "Error: [urlShortenerWsManager] spring's instance is null";
 		}
 		
-		final String longUrl = urlShortenerWsManager.expandURL(shortUrl, UrlShortenerUtil.CLOUD_HTTP_SERVER);
+		final String longUrl = urlShortenerWsManager.expandURL(shortUrl, UrlShortenerUtil.getCloudHttpServer());
 		
 		if (longUrl != null) {
 			return longUrl;

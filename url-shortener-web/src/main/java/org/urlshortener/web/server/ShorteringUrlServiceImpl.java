@@ -21,7 +21,7 @@ public class ShorteringUrlServiceImpl extends RemoteServiceServlet implements
 			return "Error: [urlShortenerWsManager] spring's instance is null";
 		}
 		
-		final String shortUrl = urlShortenerWsManager.shortenURL(longUrl, UrlShortenerUtil.CLOUD_HTTP_SERVER);
+		final String shortUrl = urlShortenerWsManager.shortenURL(longUrl, UrlShortenerUtil.getCloudHttpServer());
 		
 		if (shortUrl != null) {
 			return shortUrl;

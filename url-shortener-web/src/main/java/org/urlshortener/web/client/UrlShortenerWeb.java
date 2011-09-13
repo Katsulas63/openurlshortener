@@ -45,7 +45,23 @@ public class UrlShortenerWeb implements EntryPoint {
 	 */
 	private final ExpandingUrlServiceAsync expandingUrlService = GWT
 			.create(ExpandingUrlService.class);
+	
+	/**
+	 * This is the entry point method.
+	 */
+	public void onModuleLoad() {
+		onModuleLoadShortenUrl();
+		onModuleLoadExpandUrl();
+	}
+	
+	/**
+	 * auxiliary methods<br>
+	 * =================
+	 */
 
+	/**
+	 * Entry point for shortenUrl panel
+	 */
 	private void onModuleLoadShortenUrl() {
 		final Button button = new Button("Make Short URL");
 		final TextBox field = new TextBox();
@@ -63,10 +79,6 @@ public class UrlShortenerWeb implements EntryPoint {
 
 		field.setFocus(true);
 		field.selectAll();
-		
-		/**
-		 * todo
-		 */
 		
 		// Create the popup dialog box
 		final DialogBox dialogBox = new DialogBox();
@@ -162,6 +174,9 @@ public class UrlShortenerWeb implements EntryPoint {
 		field.addKeyUpHandler(handler);
 	}
 	
+	/**
+	 * Entry point for expandUrl panel
+	 */
 	private void onModuleLoadExpandUrl() {
 		final Button button = new Button("Redirect");
 		final TextBox field = new TextBox();
@@ -179,10 +194,6 @@ public class UrlShortenerWeb implements EntryPoint {
 
 		field.setFocus(true);
 		field.selectAll();
-		
-		/**
-		 * todo
-		 */
 		
 		// Create the popup dialog box
 		final DialogBox dialogBox = new DialogBox();
@@ -278,13 +289,5 @@ public class UrlShortenerWeb implements EntryPoint {
 		MyHandler handler = new MyHandler();
 		button.addClickHandler(handler);
 		field.addKeyUpHandler(handler);
-	}
-
-	/**
-	 * This is the entry point method.
-	 */
-	public void onModuleLoad() {
-		onModuleLoadShortenUrl();
-		onModuleLoadExpandUrl();
-	}
+	}	
 }
