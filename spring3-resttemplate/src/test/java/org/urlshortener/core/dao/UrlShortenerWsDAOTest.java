@@ -1,5 +1,6 @@
 package org.urlshortener.core.dao;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.urlshortener.core.dao.IUrlShortenerWsDAO;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = UrlShortenerWsDAOTest.APPLICATION_CONTEXT)
+@Ignore
 public class UrlShortenerWsDAOTest {
 	
 	/**
@@ -25,7 +27,7 @@ public class UrlShortenerWsDAOTest {
 	public static final String APPLICATION_CONTEXT = "classpath:/spring/applicationContext-tests-ws.xml";
 	
 	private static final String CLOUD_HTTP_SERVER = "http://url-shortener-ws.cloudfoundry.com";
-	private static final Boolean LOCAL_MODE = Boolean.TRUE;
+	private static final Boolean LOCAL_MODE = Boolean.FALSE;
 	private static final String LONG_URL = "http://www.facebook.com/settings";
 	private static final String SHORT_URL = "http://ushrt.tk/66f887";
 
