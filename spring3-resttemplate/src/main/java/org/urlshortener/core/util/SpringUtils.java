@@ -9,7 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @author cyague
  * 
  */
-public final class SpringUtil {
+public final class SpringUtils {
 
 	/**
 	 * Obtiene la instancia de Spring de un bean 'beanName', de clase

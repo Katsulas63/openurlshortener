@@ -2,7 +2,7 @@ package org.urlshortener.web.utils;
 
 import org.urlshortener.core.service.IUrlShortenerWsManager;
 import org.urlshortener.core.util.ConfigUtil;
-import org.urlshortener.core.util.SpringUtil;
+import org.urlshortener.core.util.SpringUtils;
 
 /**
  * Clase de utilidades de URL-Shortening 
@@ -21,7 +21,7 @@ public final class UrlShortenerUtil {
 	 * @return
 	 */
 	public static IUrlShortenerWsManager getManager() {
-		return (IUrlShortenerWsManager) SpringUtil.getBean(
+		return (IUrlShortenerWsManager) SpringUtils.getBean(
 				"urlShortenerWsManager", IUrlShortenerWsManager.class,
 				"classpath*:/spring/applicationContext-service-ws.xml");
 	}
