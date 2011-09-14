@@ -1,4 +1,4 @@
-package org.urlshortener.web.utils;
+package org.urlshortener.web.util;
 
 import org.urlshortener.core.service.IUrlShortenerWsManager;
 import org.urlshortener.core.util.ConfigUtil;

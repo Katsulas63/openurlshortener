@@ -2,7 +2,7 @@ package org.urlshortener.web.server;
 
 import org.urlshortener.core.service.IUrlShortenerWsManager;
 import org.urlshortener.web.client.ExpandingUrlService;
-import org.urlshortener.web.utils.UrlShortenerUtil;
+import org.urlshortener.web.util.UrlShortenerUtil;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
