@@ -8,6 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 import org.urlshortener.core.dao.IUrlShortenerWsDAO;
+import org.urlshortener.core.util.ConfigUtil;
 
 /**
  * 
@@ -26,11 +27,12 @@ public class UrlShortenerWsDAOTest {
 	
 	public static final String APPLICATION_CONTEXT = "classpath:/spring/applicationContext-tests-ws.xml";
 	
-	private static final String CLOUD_HTTP_SERVER = "http://url-shortener-ws.cloudfoundry.com";
-	private static final Boolean LOCAL_MODE = Boolean.FALSE;
-	private static final String LONG_URL = "http://www.facebook.com/settings";
-	private static final String SHORT_URL = "http://ushrt.tk/66f887";
-
+	private static final String PREFIX_PROPERTY = "DAO.TEST.";
+	private static final String CLOUD_HTTP_SERVER = "CLOUD_HTTP_SERVER";
+	private static final String LOCAL_MODE = "LOCAL_MODE";
+	private static final String LONG_URL = "LONG_URL";
+	private static final String SHORT_URL = "SHORT_URL";
+	
 	private static final String SHORTEN_URL_ERROR = "Error shortening Url:\n";
 
 	private static final String EXPAND_URL_ERROR = "Error expanding Url:\n";
@@ -49,25 +51,27 @@ public class UrlShortenerWsDAOTest {
 	 */
 	@Test
 	public void testService() {
-		
 		String shortUrl = null, longUrl = null;
+		final String longUrlTest = ConfigUtil.getTestConfigProperty(PREFIX_PROPERTY, LONG_URL, null);
+		final String server =  ConfigUtil.getTestConfigProperty(PREFIX_PROPERTY, CLOUD_HTTP_SERVER, null);
+		final Boolean localMode =  ConfigUtil.getTestConfigBoolProperty(PREFIX_PROPERTY, LOCAL_MODE,Boolean.FALSE);
 
 		final Double randomValue = Math.random() * 1000;
-		final String randomUrl = LONG_URL + "/" + randomValue.intValue();
+		final String randomUrl = longUrlTest + "/" + randomValue.intValue();
+		
 
-		if (LOCAL_MODE) {
+		if (localMode) {
 			shortUrl = urlShortenerWsDAO.shortenUrl(randomUrl);
 		} else {
-			shortUrl = urlShortenerWsDAO.shortenUrl(randomUrl,
-					CLOUD_HTTP_SERVER);
+			shortUrl = urlShortenerWsDAO.shortenUrl(randomUrl, server);
 		}
 
 		Assert.notNull(shortUrl, SHORTEN_URL_ERROR + "shortUrl is null");
 
-		if (LOCAL_MODE) {
+		if (localMode) {
 			longUrl = urlShortenerWsDAO.expandUrl(shortUrl);
 		} else {
-			longUrl = urlShortenerWsDAO.expandUrl(shortUrl, CLOUD_HTTP_SERVER);
+			longUrl = urlShortenerWsDAO.expandUrl(shortUrl, server);
 		}
 
 		Assert.notNull(longUrl, EXPAND_URL_ERROR + "longUrl is null");
@@ -85,12 +89,15 @@ public class UrlShortenerWsDAOTest {
 	@Test
 	public void testShortenUrlService() {
 		String shortUrl = null;
-
-		if (LOCAL_MODE) {
-			shortUrl = urlShortenerWsDAO.shortenUrl(LONG_URL);
+		final Boolean localMode =  ConfigUtil.getTestConfigBoolProperty(PREFIX_PROPERTY, LOCAL_MODE,Boolean.FALSE);
+		final String longUrl =  ConfigUtil.getTestConfigProperty(PREFIX_PROPERTY, LONG_URL, null);
+		final String server =  ConfigUtil.getTestConfigProperty(PREFIX_PROPERTY, CLOUD_HTTP_SERVER, null);
+		
+		if (localMode) {
+			shortUrl = urlShortenerWsDAO.shortenUrl(longUrl);
 		} else {
 			shortUrl = urlShortenerWsDAO
-					.shortenUrl(LONG_URL, CLOUD_HTTP_SERVER);
+					.shortenUrl(longUrl, server);
 		}
 
 		Assert.notNull(shortUrl, SHORTEN_URL_ERROR + "shortUrl is null");
@@ -102,11 +109,14 @@ public class UrlShortenerWsDAOTest {
 	@Test
 	public void testExpandUrlService() {
 		String longUrl = null;
-
-		if (LOCAL_MODE) {
-			longUrl = urlShortenerWsDAO.expandUrl(SHORT_URL);
+		final Boolean localMode = ConfigUtil.getTestConfigBoolProperty(PREFIX_PROPERTY, LOCAL_MODE,Boolean.FALSE);
+		final String shortUrl = ConfigUtil.getTestConfigProperty(PREFIX_PROPERTY, SHORT_URL, null);
+		final String server = ConfigUtil.getTestConfigProperty(PREFIX_PROPERTY, CLOUD_HTTP_SERVER, null);
+		
+		if (localMode) {
+			longUrl = urlShortenerWsDAO.expandUrl(shortUrl);
 		} else {
-			longUrl = urlShortenerWsDAO.expandUrl(SHORT_URL, CLOUD_HTTP_SERVER);
+			longUrl = urlShortenerWsDAO.expandUrl(shortUrl, server);
 		}
 
 		Assert.notNull(longUrl, EXPAND_URL_ERROR + "longUrl is null");

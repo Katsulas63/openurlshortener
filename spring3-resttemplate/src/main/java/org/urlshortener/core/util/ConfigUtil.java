@@ -12,7 +12,15 @@ import java.util.Properties;
  */
 public final class ConfigUtil {
 
-	
+	/**
+	 * Obtiene el valor de una propiedad de un fichero de configuracion, que por defecto es 'application.properties'
+	 * 
+	 * @param propertyName
+	 * @return
+	 */
+	public static String getConfigTestProperty(String propertyName) {
+		return getConfigProperty(propertyName, "tests.properties");
+	}
 	
 	/**
 	 * Obtiene el valor de una propiedad de un fichero de configuracion, que por defecto es 'application.properties'
@@ -52,6 +60,35 @@ public final class ConfigUtil {
             }
         }
         
+		return result;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public static String getTestConfigProperty(String prefixProperty, String propertyName, String defaultValue) {
+		String result = ConfigUtil.getConfigTestProperty(prefixProperty+propertyName);
+		
+		if (result == null) {
+			result = defaultValue;
+		}
+		return result;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public static Boolean getTestConfigBoolProperty(String prefixProperty, String propertyName, Boolean defaultValue) {
+		Boolean result = null;
+		final String resultStr = ConfigUtil.getConfigTestProperty(prefixProperty+propertyName);
+		
+		if (resultStr != null) {
+			result = Boolean.parseBoolean(resultStr);
+		} else {
+			result = defaultValue;
+		}
 		return result;
 	}
 }

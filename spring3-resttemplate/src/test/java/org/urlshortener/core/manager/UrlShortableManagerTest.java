@@ -8,6 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 import org.urlshortener.core.service.IUrlShortableManager;
+import org.urlshortener.core.util.ConfigUtil;
 
 /**
  * 
@@ -25,9 +26,10 @@ public class UrlShortableManagerTest {
 	 */
 	
 	public static final String APPLICATION_CONTEXT = "classpath:/spring/applicationContext-tests.xml";
-	
-	private static final String LONG_URL = "http://www.facebook.com/settings";
-	private static final String SHORT_URL = "http://ushrt.tk/66f887";
+
+	private static final String PREFIX_PROPERTY = "MANAGER.TEST.";
+	private static final String LONG_URL = "LONG_URL";
+	private static final String SHORT_URL = "SHORT_URL";
 
 	private static final String SHORTEN_URL_ERROR = "Error shortening Url:\n";
 
@@ -47,11 +49,11 @@ public class UrlShortableManagerTest {
 	 */
 	@Test
 	public void testService() {
-		
 		String shortUrl = null, longUrl = null;
+		final String longUrlTest =  ConfigUtil.getTestConfigProperty(PREFIX_PROPERTY, LONG_URL, null);
 
 		final Double randomValue = Math.random() * 1000;
-		final String randomUrl = LONG_URL + "/" + randomValue.intValue();
+		final String randomUrl = longUrlTest + "/" + randomValue.intValue();
 
 		shortUrl = urlShortableManager.shortenURL(longUrl);
 	
@@ -74,8 +76,9 @@ public class UrlShortableManagerTest {
 	@Test
 	public void testShortenUrlService() {
 		String shortUrl = null;
+		final String longUrl =  ConfigUtil.getTestConfigProperty(PREFIX_PROPERTY, LONG_URL, null);
 		
-		shortUrl = urlShortableManager.shortenURL(LONG_URL);
+		shortUrl = urlShortableManager.shortenURL(longUrl);
 
 		Assert.notNull(shortUrl, SHORTEN_URL_ERROR + "shortUrl is null");
 	}
@@ -86,8 +89,9 @@ public class UrlShortableManagerTest {
 	@Test
 	public void testExpandUrlService() {
 		String longUrl = null;
+		final String shortUrl = ConfigUtil.getTestConfigProperty(PREFIX_PROPERTY, SHORT_URL, null);
 		
-		longUrl = urlShortableManager.expandURL(SHORT_URL);
+		longUrl = urlShortableManager.expandURL(shortUrl);
 
 		Assert.notNull(longUrl, EXPAND_URL_ERROR + "longUrl is null");
 
