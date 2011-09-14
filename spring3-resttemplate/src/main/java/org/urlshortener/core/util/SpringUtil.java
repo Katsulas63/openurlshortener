@@ -1,4 +1,4 @@
-package org.urlshortener.web.utils;
+package org.urlshortener.core.util;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

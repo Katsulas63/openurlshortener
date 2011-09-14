@@ -1,4 +1,4 @@
-package org.urlshortener.web.utils;
+package org.urlshortener.core.util;
 
 import java.io.IOException;
 import java.io.InputStream;

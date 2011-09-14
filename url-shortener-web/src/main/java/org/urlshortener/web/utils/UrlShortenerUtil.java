@@ -1,6 +1,8 @@
 package org.urlshortener.web.utils;
 
 import org.urlshortener.core.service.IUrlShortenerWsManager;
+import org.urlshortener.core.util.ConfigUtil;
+import org.urlshortener.core.util.SpringUtil;
 
 /**
  * Clase de utilidades de URL-Shortening 
