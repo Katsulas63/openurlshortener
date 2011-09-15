@@ -11,6 +11,7 @@ import org.urlshortener.core.service.IUrlShortableManager;
 import org.urlshortener.core.util.ConfigUtil;
 
 /**
+ * Test de 'urlShortableManager'
  * 
  * @author cyague
  *

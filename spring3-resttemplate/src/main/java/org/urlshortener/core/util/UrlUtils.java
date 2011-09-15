@@ -5,6 +5,12 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.StringTokenizer;
 
+/**
+ * Clase de utilidades de tratamiento de URLs
+ * 
+ * @author cyague
+ *
+ */
 public final class UrlUtils {
 	
 	public static final String URL_SHORTENING_SERVER = "http://ushrt.tk/";

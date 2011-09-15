@@ -11,6 +11,7 @@ import org.urlshortener.core.dao.IUrlShortenerWsDAO;
 import org.urlshortener.core.util.ConfigUtil;
 
 /**
+ * Test de 'urlShortenerWsDAO'
  * 
  * @author cyague
  *

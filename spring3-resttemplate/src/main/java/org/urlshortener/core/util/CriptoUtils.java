@@ -7,8 +7,20 @@ import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
+/**
+ * Clase de utilidades de encriptación
+ * 
+ * @author cyague
+ *
+ */
 public final class CriptoUtils {
 
+	/**
+	 * Aplica una función hash sobre un valor entero
+	 * @param value valor entero
+	 * @param algorithm función hash
+	 * @return
+	 */
 	public static String hash(Integer value, String algorithm) {
 		String result = "";
 		try {
@@ -24,6 +36,11 @@ public final class CriptoUtils {
 		return result;
 	}
 
+	/**
+	 * Comprime una cadena de caraceres
+	 * @param value
+	 * @return
+	 */
 	@SuppressWarnings("unused")
 	public static String compress(String value) {
 
@@ -45,6 +62,13 @@ public final class CriptoUtils {
 
 	}
 
+	/**
+	 * Descomprime una cadena de caracteres
+	 * 
+	 * @param value
+	 * @param compressedDataLength
+	 * @return
+	 */
 	public static String decompress(String value, int compressedDataLength) {
 		// Decompress the bytes
 		Inflater decompresser = new Inflater();
@@ -69,7 +93,7 @@ public final class CriptoUtils {
 	}
 
 	/**
-	 * Convierta a Hexa
+	 * Convierte un array de bytes a hexadecimal
 	 * 
 	 * @param data
 	 * @return
