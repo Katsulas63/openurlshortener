@@ -1,0 +1,366 @@
+/* apireference.css */
+
+.apiindent {
+  padding-left: 1em;
+  padding-bottom: 1em;
+}
+.authrequired {
+  font-size: 70%;
+  font-variant: small-caps;
+  font-weight: normal;
+  margin-left: .5em;
+}
+.required {
+  font-size: 70%;
+  font-variant: small-caps;
+  font-weight: normal;
+  margin-left: .5em;
+}
+.apiscope {
+  font-weight: bold;
+  font-size: 9pt;
+}
+.apiobject {
+  color: #333;
+  font-size: 8pt !important;
+}
+
+/* custom prettyprinting */
+
+pre, code {
+  color: #000;
+}
+.apimethod {
+  font-style: italic;
+}
+pre span.apimethod {
+  font-style: normal;
+  font-weight: bold;
+}
+
+/* colored matching .typ */
+pre a.apiresource, pre .apiresource, code .apiresource, code a.apiresource {
+  color: #606 !important;
+  font-weight: bold;
+}
+
+/* colored matching .com */
+.apicomment {
+  color: #600;
+}
+
+/* colored matching .kwd */
+.apitype {
+  color: #006;
+}
+
+/* colored matching .lit */
+.apiparam {
+  color: #066;
+  font-family: monospace;
+  font-style: italic;
+}
+/* colored matching .lit */
+.apivar {
+  color: #066;
+  font-family: monospace;
+  font-style: italic;
+}
+.apivar::before
+{
+  content:"{";
+}
+.apivar::after
+{
+  content:"}";
+}
+.apiqp {
+  font-size: 8pt;
+}
+pre.apiexp {
+  padding-bottom: 1.99em;
+}
+p.apiexp {
+  padding-bottom: 0.4em;
+}
+a.button {
+  background: #e4ecf5;
+  background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, color-stop(0%, #d7e6f5), color-stop(100%, #e4ecf5));
+  background-image: -moz-linear-gradient(bottom, #d7e6f5 0%, #e4ecf5 100%);
+  background-image: linear-gradient(bottom, #d7e6f5 0%, #e4ecf5 100%);
+  border-top: 1px solid #abbbcc;
+  border-left: 1px solid #a7b6c7;
+  border-bottom: 1px solid #a1afbf;
+  border-right: 1px solid #a7b6c7;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  border-radius: 3px;
+  -moz-box-shadow: white 0 1px 0 0 inset;
+  -webkit-box-shadow: white 0 1px 0 0 inset;
+  -o-box-shadow: white 0 1px 0 0 inset;
+  box-shadow: white 0 1px 0 0 inset;
+  color: #204e80;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 1;
+  text-decoration: none;
+  padding: 6px 12px 7px 8px;
+  text-align: center;
+  text-shadow: 0 1px 1px #fff;
+  -moz-transition-property: background;
+  -webkit-transition-property: background;
+  -o-transition-property: background;
+  transition-property: background;
+}
+.button:visited {
+  color: #204e80;
+}
+.button:hover {
+  background: #d7e5f5;
+  background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, color-stop(0%, #cbe0f5), color-stop(100%, #d7e6f5));
+  background-image: -moz-linear-gradient(bottom, #cbe0f5 0%, #d7e6f5 100%);
+  background-image: linear-gradient(bottom, #cbe0f5 0%, #d7e6f5 100%);
+  color: #1a3e66;
+  cursor: pointer;
+}
+.button:active {
+  border: 1px solid #8c98a7;
+  -moz-box-shadow: #7aace3 0 0 20px 0 inset,#eeeeee 0 1px 0 0;
+  -webkit-box-shadow: #7aace3 0 0 20px 0 inset,#eeeeee 0 1px 0 0;
+  -o-box-shadow: #7aace3 0 0 20px 0 inset,#eeeeee 0 1px 0 0;
+  box-shadow: #7aace3 0 0 20px 0 inset,#eeeeee 0 1px 0 0;
+}
+.apiexp-img {
+  border: 0;
+  padding: 0;
+  vertical-align: text-top;
+  margin: 0 5px 0 -2px;
+  position: relative;
+  top: -1px;
+}
+
+/* reference guide formatting overrides */
+
+pre {
+  padding: 12px !important;
+}
+table.matchpre {
+  width: 100% !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}
+table.matchpre code {
+  font-size: 9pt;
+}
+#gc-pagecontent table.matchpre th {
+  border-color: #BBB !important;
+  background: #FAFAFA !important;
+  padding: 6px 12px !important;
+}
+#gc-pagecontent table.matchpre td {
+  border-color: #BBB !important;
+  padding: 4px 12px !important;
+}
+#apitoc table.matchpre td {
+  vertical-align: middle;
+}
+p.apinote {
+  background: #FAFAFA !important;
+  border-top: 1px solid #BBB;
+  border-bottom: 1px solid #BBB;
+  padding: 4px !important;
+  margin: 1em 0px 0px;
+}
+p.authnote {
+  background: url(/images/padlock-14.png) 2px 5px no-repeat;
+  min-height: 20px;
+  border-top: 1px solid #DDD;
+  border-bottom: 1px solid #DDD;
+  padding: 4px 12px 4px 30px;
+  margin: 1em 0px 0px;
+}
+p.apinote code, p.authnote code {
+  font-size: 9pt;
+}
+h4.method {
+  padding: 4px 0 4px 0;
+  font-weight: bold;
+  color: #222;
+}
+
+/*
+* jQuery UI CSS Framework
+* Copyright (c) 2010 AUTHORS.txt (http://jqueryui.com/about)
+* Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
+*/
+
+.ui-helper-hidden {
+  display: none;
+}
+.ui-helper-hidden-accessible {
+  position: absolute;
+  left: -99999999px;
+}
+.ui-helper-reset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  line-height: 1.3;
+  font-size: 100%;
+  list-style: none;
+}
+.ui-helper-clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.ui-helper-clearfix {
+  display: inline-block;
+}
+/* required comment for clearfix to work in Opera \*/
+* html .ui-helper-clearfix {
+  height:1%;
+}
+/*.ui-helper-clearfix { display:block;
+}
+/* end clearfix */
+.ui-helper-zfix { width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  opacity: 0;
+}
+
+.ui-state-disabled {
+  cursor: default !important;
+}
+.ui-widget-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.ui-widget-content {
+  color: #000;
+}
+
+/* compatability hacks */
+.ui-widget-header, .ui-widget-content {
+ border: none;
+ background: #FFF;
+}
+.ui-widget {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.ui-widget-header {
+  border-bottom: 1px solid #BBB;
+  color: #000;
+}
+.ui-widget-header a {
+  color: #000;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default {
+  border: 1px solid #BBB;
+  background: #FAFAFA;
+  color: #000;
+}
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
+  color: #00C;
+}
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus {
+  border: 1px solid #BBB;
+  background: #FAFAFA;
+}
+.ui-state-focus a, .ui-state-focus a:hover {
+  outline: none;
+}
+.ui-state-active, .ui-widget-content .ui-state-active {
+  border: 1px solid #BBB;
+  background: #FFF;
+  color: #000;
+}
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
+  color: #000;
+}
+.ui-widget :active {
+  outline: none;
+
+}
+.ui-corner-top {
+  -moz-border-radius-topleft: 6px;
+  -webkit-border-top-left-radius: 6px;
+  border-top-left-radius: 6px;
+  -moz-border-radius-topright: 6px;
+  -webkit-border-top-right-radius: 6px;
+  border-top-right-radius: 6px;
+}
+.ui-tabs {
+  position: relative;
+  padding: 0;
+  zoom: 1;
+}
+/* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
+.ui-tabs .ui-tabs-nav {
+  margin: 0;
+  padding: 1em .2em 0;
+}
+.ui-tabs .ui-tabs-nav li {
+  list-style: none;
+  float: left;
+  position: relative;
+  top: 1px;
+  margin: 0 4px 1px 4px;
+  border-bottom: 0 !important;
+  padding: 0;
+  white-space: nowrap;
+}
+.ui-tabs .ui-tabs-nav li a {
+  float: left;
+  padding: 4px 10px;
+}
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected {
+  margin-bottom: 0;
+  padding-bottom: 1px;
+}
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a {
+  cursor: text;
+}
+.ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a {
+  cursor: pointer;
+}
+/* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
+.ui-tabs-selected a {
+  text-decoration: none;
+  font-weight: bold;
+}
+.ui-tabs .ui-tabs-panel {
+  display: block;
+  border: 0;
+  padding: 0;
+  background: none;
+}
+.ui-tabs .ui-tabs-hide {
+  display: none !important;
+}
+
+/* Styles for use with selector.js. */
+
+.ui-codeSample { position: relative; border: 6px solid #eee; padding: 1em; margin-bottom: 18px; }
+.ui-codeSample .selector { position: absolute; top: -21px; right: -21px; padding: 25px; font-size: 85%; }
+.ui-codeSample .selector > select { margin: 0; height: 1.5em; }
+.ui-codeSample .selector > .prompt { background: #FFF; line-height: 1.8em; float: left; padding: 0 3px; margin-right: 2px; }
+.ui-codeSample .ui-codeSample-panel { display: block; overflow: auto; margin: 0; }
+.ui-codeSample .ui-codeSample-panel pre { margin: 0; }
+.ui-codeSample .ui-codeSample-hide { display: none; }

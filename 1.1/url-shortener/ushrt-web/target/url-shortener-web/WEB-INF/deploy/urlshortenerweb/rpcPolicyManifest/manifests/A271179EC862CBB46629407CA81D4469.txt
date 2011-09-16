@@ -1,0 +1,2 @@
+serviceClass: org.urlshortener.web.client.ShorteringUrlService
+path: FC4CA916212B35313490B7C89218B8A8.gwt.rpc

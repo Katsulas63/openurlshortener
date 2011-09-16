@@ -1,0 +1,4 @@
+# Module urlshortenerweb
+# RPC service class, partial path of RPC policy file
+org.urlshortener.web.client.ShorteringUrlService, FC4CA916212B35313490B7C89218B8A8.gwt.rpc
+org.urlshortener.web.client.ExpandingUrlService, CC6A46B2C141DDCAC2D01D47B68037C7.gwt.rpc

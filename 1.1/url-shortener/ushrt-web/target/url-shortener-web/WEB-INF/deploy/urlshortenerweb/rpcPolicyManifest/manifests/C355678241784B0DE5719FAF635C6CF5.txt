@@ -1,0 +1,2 @@
+serviceClass: org.urlshortener.web.client.ExpandingUrlService
+path: CC6A46B2C141DDCAC2D01D47B68037C7.gwt.rpc
